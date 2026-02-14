@@ -17,8 +17,8 @@ interface HeroProps {
 export function Hero({ config }: HeroProps) {
   return (
     <SectionWrapper id="hero" className="justify-center items-center min-h-[100dvh]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full w-full">
-        <div className="flex flex-col gap-6 z-20 order-2 md:order-1 text-center md:text-left">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center h-full w-full">
+        <div className="flex flex-col gap-4 md:gap-6 z-20 order-2 md:order-1 text-center md:text-left">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -58,7 +58,7 @@ export function Hero({ config }: HeroProps) {
           </div>
         </div>
 
-        <div className="h-[50vh] md:h-[90vh] w-full order-1 md:order-2 relative">
+        <div className="h-[40vh] md:h-[90vh] w-full order-1 md:order-2 relative">
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 pointer-events-none md:hidden" />
           <HeroRobot />
         </div>

@@ -2,7 +2,6 @@
 
 import { motion, useMotionValue, useTransform, useSpring, useAnimationFrame } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 function Eye({ side, mouseX, mouseY }: { side: 'left' | 'right'; mouseX: number; mouseY: number }) {
   const offsetX = side === 'left' ? -24 : 24;
@@ -103,7 +102,7 @@ function CircuitLines() {
 
 function StatusIndicators() {
   return (
-    <g transform="translate(0, 160)">
+    <g transform="translate(0, 88)">
       {[-20, -10, 0, 10, 20].map((x, i) => (
         <motion.rect
           key={i}
@@ -138,7 +137,6 @@ function FloatingParticle({ delay, x, y }: { delay: number; x: number; y: number
 export function HeroRobot() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const isMobile = useIsMobile();
   const breathe = useMotionValue(0);
 
   useAnimationFrame((t) => {
@@ -167,7 +165,7 @@ export function HeroRobot() {
       </div>
 
       <motion.svg
-        viewBox="-120 -110 240 280"
+        viewBox="-120 -110 240 210"
         className="w-full h-full max-w-[500px] max-h-[600px] drop-shadow-2xl"
         style={{ y: breatheY }}
       >
@@ -353,29 +351,8 @@ export function HeroRobot() {
           </g>
         ))}
 
-        {/* Legs (hidden on mobile) */}
-        {!isMobile && [-1, 1].map((side) => (
-          <g key={`leg-${side}`} transform={`translate(${side * 18}, 99)`}>
-            <rect x="-10" y="0" width="20" height="12" rx="3" fill="#1a1a2e" stroke="#7c3aed" strokeWidth="0.5" opacity="0.4" />
-            <motion.g
-              animate={{ y: [0, 1, 0] }}
-              transition={{ duration: 3, repeat: Infinity, delay: side === -1 ? 0.2 : 0.7 }}
-            >
-              <rect
-                x="-9" y="12" width="18" height="30" rx="5"
-                fill="#1a1a2e"
-                stroke="#7c3aed"
-                strokeWidth="1"
-                opacity="0.6"
-              />
-              {/* Foot */}
-              <rect x="-12" y="42" width="24" height="8" rx="4" fill="#1a1a2e" stroke="#7c3aed" strokeWidth="1" opacity="0.5" />
-            </motion.g>
-          </g>
-        ))}
-
-        {/* Status indicators at bottom (hidden on mobile) */}
-        {!isMobile && <StatusIndicators />}
+        {/* Status indicators at bottom */}
+        <StatusIndicators />
 
         <motion.text
           x="30" y="-90"
