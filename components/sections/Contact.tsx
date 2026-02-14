@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { Mail, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import profileData from '@/data/portfolio.json';
 
 interface ContactProps {
@@ -37,6 +37,18 @@ export function Contact({ config }: ContactProps) {
                 <p className="text-sm text-muted-foreground mb-1">Email</p>
                 <a href={`mailto:${profile.email}`} className="text-lg font-medium hover:text-primary transition-colors">
                   {profile.email}
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 group">
+              <div className="h-12 w-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                <Phone className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Phone</p>
+                <a href={`tel:${profile.phone}`} className="text-lg font-medium hover:text-primary transition-colors">
+                  {profile.phone}
                 </a>
               </div>
             </div>

@@ -46,12 +46,14 @@ export function Projects({ config }: ProjectsProps) {
                         Code
                       </span>
                     </a>
-                    <a href="#" className="group/demo flex items-center rounded-full bg-black/60 backdrop-blur-sm border border-white/10 hover:bg-black/80 px-2.5 py-2 transition-all duration-300">
+                    {'link' in project && project.link && (
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="group/demo flex items-center rounded-full bg-black/60 backdrop-blur-sm border border-white/10 hover:bg-black/80 px-2.5 py-2 transition-all duration-300">
                       <ExternalLink className="w-4 h-4 shrink-0" />
                       <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium group-hover/demo:max-w-[80px] group-hover/demo:ml-1.5 transition-all duration-300">
                         Live Demo
                       </span>
                     </a>
+                    )}
                  </div>
               </div>
               
