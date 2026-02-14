@@ -1,0 +1,21 @@
+{
+  "profile": {
+    "name": "Ajay Darisi",
+    "role": "Software Developer / Full Stack Developer",
+    "location": "Bengaluru, India",
+    "email": "ajay.darisi@example.com",
+    "socials": {
+      "github": "https://github.com/ajaydarisi",
+      "linkedin": "https://linkedin.com/in/ajaydarisi",
+      "twitter": "https://twitter.com/ajaydarisi"
+    }
+  },
+  "sections": [
+    { "id": "hero", "type": "hero", "config": { "title": "Ajay Darisi", "subtitle": "Full Stack Developer", "tagline": "Building the future of web" } },
+    { "id": "about", "type": "about", "config": { "title": "About Me" } },
+    { "id": "skills", "type": "skills", "config": { "title": "Tech Stack" } },
+    { "id": "experience", "type": "experience", "config": { "title": "Experience" } },
+    { "id": "projects", "type": "projects", "config": { "title": "Featured Projects" } },
+    { "id": "contact", "type": "contact", "config": { "title": "Get in Touch" } }
+  ]
+}

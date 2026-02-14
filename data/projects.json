@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Snapshots App",
+    "tech": ["React", "Firebase", "Tailwind"],
+    "description": "A social photo sharing application with real-time updates and cloud storage."
+  },
+  {
+    "id": 2,
+    "title": "Translation System",
+    "tech": ["NextJS", "NodeJS", "PostgreSQL"],
+    "description": "Enterprise translation management system supporting 50+ languages for global content."
+  },
+  {
+    "id": 3,
+    "title": "Payment Wrapper",
+    "tech": ["TypeScript", "Stripe", "Express"],
+    "description": "Unified payment gateway wrapper simplifying integration for multiple providers."
+  },
+  {
+    "id": 4,
+    "title": "Fundraising Platform",
+    "tech": ["Refine", "Supabase", "Material UI"],
+    "description": "SaaS platform for managing fundraising campaigns and donor relationships."
+  }
+]

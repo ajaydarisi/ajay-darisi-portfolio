@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "role": "Associate Developer",
+    "company": "Sumeru Technology Solutions",
+    "period": "2021 - Present",
+    "achievements": [
+      "Led 15-member cross-functional team.",
+      "Built global CRM platform used in 60+ countries.",
+      "Developed reusable payment gateway module supporting 100k+ registrations.",
+      "Built translation management system for 50+ languages.",
+      "Delivered optimized NextJS components within 48 hours."
+    ]
+  },
+  {
+    "id": 2,
+    "role": "Web Developer",
+    "company": "Saptarishi Solutions",
+    "period": "2020 - 2021",
+    "achievements": [
+      "Converted 600+ Figma designs into production UI.",
+      "Built 15+ reusable UI components."
+    ]
+  }
+]
