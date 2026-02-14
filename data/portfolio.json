@@ -13,9 +13,82 @@
   "sections": [
     { "id": "hero", "type": "hero", "config": { "title": "Ajay Darisi", "subtitle": "Full Stack Developer", "tagline": "Building the future of web" } },
     { "id": "about", "type": "about", "config": { "title": "About Me" } },
-    { "id": "skills", "type": "skills", "config": { "title": "Tech Stack" } },
+    { "id": "skills", "type": "skills", "config": { "title": "Technical Arsenal" } },
     { "id": "experience", "type": "experience", "config": { "title": "Experience" } },
     { "id": "projects", "type": "projects", "config": { "title": "Featured Projects" } },
     { "id": "contact", "type": "contact", "config": { "title": "Get in Touch" } }
+  ],
+  "skills": [
+    {
+      "category": "Frontend",
+      "items": ["ReactJS", "NextJS", "Tailwind CSS", "Refine", "Shadcn UI"]
+    },
+    {
+      "category": "Backend",
+      "items": ["NestJS", "ExpressJS", "NodeJS", "Supabase", "PostgreSQL", "REST APIs"]
+    },
+    {
+      "category": "Languages",
+      "items": ["TypeScript", "JavaScript"]
+    },
+    {
+      "category": "Payments",
+      "items": ["Stripe", "PayPal", "CorvusPay", "GoldenPay", "Tap2Pay"]
+    },
+    {
+      "category": "Tools",
+      "items": ["AWS", "Docker", "Jenkins", "Git", "Figma", "JIRA"]
+    }
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "role": "Associate Developer",
+      "company": "Sumeru Technology Solutions",
+      "period": "2021 - Present",
+      "achievements": [
+        "Led 15-member cross-functional team.",
+        "Built global CRM platform used in 60+ countries.",
+        "Developed reusable payment gateway module supporting 100k+ registrations.",
+        "Built translation management system for 50+ languages.",
+        "Delivered optimized NextJS components within 48 hours."
+      ]
+    },
+    {
+      "id": 2,
+      "role": "Web Developer",
+      "company": "Saptarishi Solutions",
+      "period": "2020 - 2021",
+      "achievements": [
+        "Converted 600+ Figma designs into production UI.",
+        "Built 15+ reusable UI components."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Snapshots App",
+      "tech": ["React", "Firebase", "Tailwind"],
+      "description": "A social photo sharing application with real-time updates and cloud storage."
+    },
+    {
+      "id": 2,
+      "title": "Translation System",
+      "tech": ["NextJS", "NodeJS", "PostgreSQL"],
+      "description": "Enterprise translation management system supporting 50+ languages for global content."
+    },
+    {
+      "id": 3,
+      "title": "Payment Wrapper",
+      "tech": ["TypeScript", "Stripe", "Express"],
+      "description": "Unified payment gateway wrapper simplifying integration for multiple providers."
+    },
+    {
+      "id": 4,
+      "title": "Fundraising Platform",
+      "tech": ["Refine", "Supabase", "Material UI"],
+      "description": "SaaS platform for managing fundraising campaigns and donor relationships."
+    }
   ]
 }

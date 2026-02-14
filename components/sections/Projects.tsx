@@ -1,10 +1,9 @@
 'use client';
 
 import { SectionWrapper } from './SectionWrapper';
-import projectsData from '@/data/projects.json';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import portfolioData from '@/data/portfolio.json';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { ExternalLink, Github } from 'lucide-react';
 
 interface ProjectsProps {
@@ -21,7 +20,7 @@ export function Projects({ config }: ProjectsProps) {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {projectsData.map((project) => (
+        {portfolioData.projects.map((project) => (
           <div 
             key={project.id} 
             className="group relative"
@@ -29,14 +28,30 @@ export function Projects({ config }: ProjectsProps) {
             <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-20 group-hover:opacity-60 transition duration-500" />
             
             <Card className="relative h-full bg-card border-white/10 overflow-hidden flex flex-col">
-              <div className="h-48 w-full bg-gradient-to-br from-gray-900 to-black relative overflow-hidden group-hover:scale-105 transition-transform duration-700">
-                 {/* Abstract project placeholder */}
-                 <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                    <div className="w-24 h-24 rounded-full bg-primary/20 blur-xl" />
-                    <div className="w-32 h-32 rounded-full bg-secondary/20 blur-xl ml-12" />
+              <div className="h-48 w-full bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
+                 <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-700">
+                   {/* Abstract project placeholder */}
+                   <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                      <div className="w-24 h-24 rounded-full bg-primary/20 blur-xl" />
+                      <div className="w-32 h-32 rounded-full bg-secondary/20 blur-xl ml-12" />
+                   </div>
+                   <div className="absolute inset-0 flex items-center justify-center font-display font-bold text-4xl text-white/10 uppercase tracking-tighter">
+                      Project 0{project.id}
+                   </div>
                  </div>
-                 <div className="absolute inset-0 flex items-center justify-center font-display font-bold text-4xl text-white/10 uppercase tracking-tighter">
-                    Project 0{project.id}
+                 <div className="absolute top-3 right-3 flex gap-2 z-10">
+                    <a href="#" className="group/code flex items-center rounded-full bg-black/60 backdrop-blur-sm border border-white/10 hover:bg-black/80 px-2.5 py-2 transition-all duration-300">
+                      <Github className="w-4 h-4 shrink-0" />
+                      <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium group-hover/code:max-w-[60px] group-hover/code:ml-1.5 transition-all duration-300">
+                        Code
+                      </span>
+                    </a>
+                    <a href="#" className="group/demo flex items-center rounded-full bg-black/60 backdrop-blur-sm border border-white/10 hover:bg-black/80 px-2.5 py-2 transition-all duration-300">
+                      <ExternalLink className="w-4 h-4 shrink-0" />
+                      <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium group-hover/demo:max-w-[80px] group-hover/demo:ml-1.5 transition-all duration-300">
+                        Live Demo
+                      </span>
+                    </a>
                  </div>
               </div>
               
@@ -59,14 +74,6 @@ export function Projects({ config }: ProjectsProps) {
                 </div>
               </CardContent>
               
-              <CardFooter className="flex gap-4 pt-4 border-t border-white/5">
-                <Button variant="ghost" size="sm" className="w-full hover:text-primary hover:bg-white/5">
-                  <Github className="w-4 h-4 mr-2" /> Code
-                </Button>
-                <Button variant="ghost" size="sm" className="w-full hover:text-primary hover:bg-white/5">
-                  <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
-                </Button>
-              </CardFooter>
             </Card>
           </div>
         ))}

@@ -35,7 +35,7 @@ export default function HomeContent() {
       </div>
 
       <footer className="py-8 text-center text-sm text-muted-foreground border-t border-white/5 bg-black/20">
-        <p>&copy; {new Date().getFullYear()} Ajay Darisi. Built with Next.js.</p>
+        <p>&copy; {new Date().getFullYear()} Ajay Darisi. Built with ❤️</p>
       </footer>
     </main>
   );

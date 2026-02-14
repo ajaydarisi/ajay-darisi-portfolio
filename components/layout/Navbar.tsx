@@ -11,7 +11,7 @@ import portfolioData from '@/data/portfolio.json';
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { activeSection, setActiveSection } = useUIStore();
+  const { activeSection, setActiveSection, setIsScrollingTo } = useUIStore();
 
   const links = portfolioData.sections.map(s => ({
     id: s.id,
@@ -29,9 +29,11 @@ export function Navbar() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
+      setIsScrollingTo(true);
+      setActiveSection(id);
       element.scrollIntoView({ behavior: 'smooth' });
       setIsOpen(false);
-      setActiveSection(id);
+      setTimeout(() => setIsScrollingTo(false), 1000);
     }
   };
 
@@ -53,7 +55,7 @@ export function Navbar() {
               : "bg-transparent border-transparent"
           )}>
             <div className="flex items-center gap-2 font-display font-bold text-xl tracking-tighter cursor-pointer" onClick={() => scrollToSection('hero')}>
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
+              <div className="w-8 h-8 px-6 rounded-lg bg-primary flex items-center justify-center text-white">
                 AD
               </div>
               <span className="hidden sm:inline-block">AJAY DARISI</span>
@@ -86,11 +88,6 @@ export function Navbar() {
               >
                 {isOpen ? <X /> : <Menu />}
               </Button>
-              
-              <div className="hidden md:flex items-center gap-2 text-xs text-muted-foreground border border-white/10 px-2 py-1 rounded bg-black/40">
-                <Command className="w-3 h-3" />
-                <span>/</span>
-              </div>
             </div>
           </nav>
         </div>

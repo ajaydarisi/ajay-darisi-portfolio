@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useTransform, useSpring, useAnimationFrame } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 function Eye({ side, mouseX, mouseY }: { side: 'left' | 'right'; mouseX: number; mouseY: number }) {
   const offsetX = side === 'left' ? -24 : 24;
@@ -32,7 +33,6 @@ function Eye({ side, mouseX, mouseY }: { side: 'left' | 'right'; mouseX: number;
         cx="0" cy="0" r="4"
         fill="#2dd4bf"
         style={{ x: pupilX, y: pupilY }}
-        filter="url(#eyeGlow)"
       />
       {/* Pupil inner */}
       <motion.circle
@@ -103,7 +103,7 @@ function CircuitLines() {
 
 function StatusIndicators() {
   return (
-    <g transform="translate(0, 145)">
+    <g transform="translate(0, 160)">
       {[-20, -10, 0, 10, 20].map((x, i) => (
         <motion.rect
           key={i}
@@ -138,6 +138,7 @@ function FloatingParticle({ delay, x, y }: { delay: number; x: number; y: number
 export function HeroRobot() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const isMobile = useIsMobile();
   const breathe = useMotionValue(0);
 
   useAnimationFrame((t) => {
@@ -256,31 +257,6 @@ export function HeroRobot() {
         <Eye side="left" mouseX={mousePos.x} mouseY={mousePos.y} />
         <Eye side="right" mouseX={mousePos.x} mouseY={mousePos.y} />
 
-        {/* Mouth / speaker grille */}
-        <g transform="translate(0, 22)">
-          {[
-            { x: -15, h: 9 },
-            { x: -7.5, h: 7 },
-            { x: 0, h: 11 },
-            { x: 7.5, h: 8 },
-            { x: 15, h: 10 },
-          ].map(({ x, h }, i) => (
-            <motion.rect
-              key={i}
-              x={x - 2} y="-3"
-              width="4" height="6"
-              rx="1"
-              fill="#2dd4bf"
-              opacity={0.3}
-              animate={{
-                height: [6, h, 6],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{ duration: 0.8 + i * 0.1, repeat: Infinity, delay: i * 0.1 }}
-            />
-          ))}
-        </g>
-
         {/* Ear panels */}
         {[-1, 1].map((side) => (
           <g key={side} transform={`translate(${side * 55}, -22)`}>
@@ -360,45 +336,47 @@ export function HeroRobot() {
         {/* Arms */}
         {[-1, 1].map((side) => (
           <g key={`arm-${side}`} transform={`translate(${side * 58}, 43)`}>
-            <motion.rect
-              x="-8" y="0" width="16" height="45" rx="6"
-              fill="#1a1a2e"
-              stroke="#7c3aed"
-              strokeWidth="1"
-              opacity="0.6"
+            <motion.g
               animate={{ y: [0, 2, 0] }}
               transition={{ duration: 3, repeat: Infinity, delay: side === -1 ? 0 : 0.5 }}
-            />
-            {/* Arm joint */}
-            <circle cx="0" cy="0" r="4" fill="#1a1a2e" stroke="#7c3aed" strokeWidth="1" opacity="0.4" />
+            >
+              <rect
+                x="-8" y="0" width="16" height="45" rx="6"
+                fill="#1a1a2e"
+                stroke="#7c3aed"
+                strokeWidth="1"
+                opacity="0.6"
+              />
+              {/* Arm joint */}
+              <circle cx="0" cy="0" r="4" fill="#1a1a2e" stroke="#7c3aed" strokeWidth="1" opacity="0.4" />
+            </motion.g>
           </g>
         ))}
 
-        {/* Legs */}
-        {[-1, 1].map((side) => (
+        {/* Legs (hidden on mobile) */}
+        {!isMobile && [-1, 1].map((side) => (
           <g key={`leg-${side}`} transform={`translate(${side * 18}, 99)`}>
             <rect x="-10" y="0" width="20" height="12" rx="3" fill="#1a1a2e" stroke="#7c3aed" strokeWidth="0.5" opacity="0.4" />
-            <motion.rect
-              x="-9" y="12" width="18" height="30" rx="5"
-              fill="#1a1a2e"
-              stroke="#7c3aed"
-              strokeWidth="1"
-              opacity="0.6"
-              animate={{ y: [12, 13, 12] }}
+            <motion.g
+              animate={{ y: [0, 1, 0] }}
               transition={{ duration: 3, repeat: Infinity, delay: side === -1 ? 0.2 : 0.7 }}
-            />
-            {/* Foot */}
-            <rect x="-12" y="42" width="24" height="8" rx="4" fill="#1a1a2e" stroke="#7c3aed" strokeWidth="1" opacity="0.5" />
+            >
+              <rect
+                x="-9" y="12" width="18" height="30" rx="5"
+                fill="#1a1a2e"
+                stroke="#7c3aed"
+                strokeWidth="1"
+                opacity="0.6"
+              />
+              {/* Foot */}
+              <rect x="-12" y="42" width="24" height="8" rx="4" fill="#1a1a2e" stroke="#7c3aed" strokeWidth="1" opacity="0.5" />
+            </motion.g>
           </g>
         ))}
 
-        {/* Status indicators at bottom */}
-        <StatusIndicators />
+        {/* Status indicators at bottom (hidden on mobile) */}
+        {!isMobile && <StatusIndicators />}
 
-        {/* HUD text overlays */}
-        <text x="-95" y="-90" fill="#7c3aed" fontSize="6" fontFamily="monospace" opacity="0.3">
-          SYS_STATUS: ACTIVE
-        </text>
         <motion.text
           x="30" y="-90"
           fill="#2dd4bf" fontSize="6" fontFamily="monospace"

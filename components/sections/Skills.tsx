@@ -1,7 +1,7 @@
 'use client';
 
 import { SectionWrapper } from './SectionWrapper';
-import skillsData from '@/data/skills.json';
+import portfolioData from '@/data/portfolio.json';
 import { motion } from 'framer-motion';
 import { 
   Code2, 
@@ -48,7 +48,7 @@ export function Skills({ config }: SkillsProps) {
           <span>SYSTEM_CAPABILITIES</span>
         </motion.div>
         <h2 className="text-4xl md:text-7xl font-black font-display mb-6 tracking-tighter">
-          TECH <span className="text-primary">STACK</span>
+          TECHNICAL <span className="text-primary">ARSENAL</span>
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto text-lg font-light leading-relaxed">
           A specialized toolkit for building high-performance, 
@@ -57,7 +57,7 @@ export function Skills({ config }: SkillsProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {skillsData.map((category, idx) => (
+        {portfolioData.skills.map((category, idx) => (
           <motion.div
             key={idx}
             initial={{ opacity: 0, y: 20 }}

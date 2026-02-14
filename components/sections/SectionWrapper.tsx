@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { useUIStore } from '@/lib/store';
 
 interface SectionWrapperProps {
   id: string;
@@ -14,6 +15,15 @@ interface SectionWrapperProps {
 export function SectionWrapper({ id, className, children }: SectionWrapperProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const isActiveInView = useInView(ref, { amount: 0.3 });
+  const setActiveSection = useUIStore((s) => s.setActiveSection);
+  const isScrollingTo = useUIStore((s) => s.isScrollingTo);
+
+  useEffect(() => {
+    if (isActiveInView && !isScrollingTo) {
+      setActiveSection(id);
+    }
+  }, [isActiveInView, id, setActiveSection, isScrollingTo]);
 
   return (
     <section 

@@ -43,15 +43,15 @@ export function Hero({ config }: HeroProps) {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-none border border-primary/50 relative overflow-hidden group px-8 py-6">
-              <span className="relative z-10 flex items-center gap-2 font-display text-lg tracking-widest">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-none border border-primary/50 relative overflow-hidden group px-5 py-3 md:px-8 md:py-6">
+              <span className="relative z-10 flex items-center gap-2 font-display text-sm md:text-lg tracking-widest">
                 INITIALIZE_ <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             </Button>
 
-            <Button size="lg" variant="outline" className="rounded-none border-white/10 hover:bg-white/5 backdrop-blur-sm group px-8 py-6">
-              <span className="flex items-center gap-2 font-display text-lg tracking-widest">
+            <Button size="lg" variant="outline" className="rounded-none border-white/10 hover:bg-white/5 backdrop-blur-sm group px-5 py-3 md:px-8 md:py-6">
+              <span className="flex items-center gap-2 font-display text-sm md:text-lg tracking-widest">
                 ARCHIVE_ <Download className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
               </span>
             </Button>

@@ -1,7 +1,7 @@
 'use client';
 
 import { SectionWrapper } from './SectionWrapper';
-import experienceData from '@/data/experience.json';
+import portfolioData from '@/data/portfolio.json';
 import { CheckCircle2 } from 'lucide-react';
 
 interface ExperienceProps {
@@ -18,7 +18,7 @@ export function Experience({ config }: ExperienceProps) {
       </h2>
 
       <div className="space-y-12 relative border-l-2 border-white/5 ml-4 md:ml-12 pl-8 md:pl-12 py-4">
-        {experienceData.map((job, idx) => (
+        {portfolioData.experience.map((job, idx) => (
           <div key={job.id} className="relative group">
             {/* Timeline dot */}
             <div className="absolute -left-[41px] md:-left-[59px] top-0 h-5 w-5 rounded-full bg-background border-2 border-primary group-hover:bg-primary group-hover:scale-125 transition-all duration-300 shadow-[0_0_10px_theme(colors.primary.DEFAULT)]" />
