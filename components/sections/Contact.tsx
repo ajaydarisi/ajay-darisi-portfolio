@@ -29,7 +29,7 @@ export function Contact({ config }: ContactProps) {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider mb-4"
           >
             <Radio className="w-3 h-3" />
-            OPEN_CHANNEL<span className="animate-pulse">_</span>
+            <span>OPEN_CHANNEL<span className="animate-pulse">_</span></span>
           </motion.div>
           <h2 className="text-4xl md:text-6xl font-bold font-display mb-6">
             {config.title}

@@ -23,7 +23,7 @@ export function Projects({ config }: ProjectsProps) {
         className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider mb-4"
       >
         <Rocket className="w-3 h-3" />
-        DEPLOYING_MODULES<span className="animate-pulse">...</span>
+        <span>DEPLOYING_MODULES<span className="animate-pulse">...</span></span>
       </motion.div>
       <h2 className="text-4xl md:text-6xl font-bold font-display mb-12 text-center md:text-left">
         {config.title}
@@ -40,14 +40,23 @@ export function Projects({ config }: ProjectsProps) {
             <Card className="relative h-full bg-card border-white/10 overflow-hidden flex flex-col">
               <div className="h-48 w-full bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
                  <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-700">
-                   {/* Abstract project placeholder */}
-                   <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                      <div className="w-24 h-24 rounded-full bg-primary/20 blur-xl" />
-                      <div className="w-32 h-32 rounded-full bg-secondary/20 blur-xl ml-12" />
-                   </div>
-                   <div className="absolute inset-0 flex items-center justify-center font-display font-bold text-4xl text-white/10 uppercase tracking-tighter">
-                      Project 0{project.id}
-                   </div>
+                   {project.image ? (
+                     <img
+                       src={project.image}
+                       alt={project.title}
+                       className="w-full h-full object-cover object-top grayscale-0 md:grayscale md:group-hover:grayscale-0 transition-all duration-700"
+                     />
+                   ) : (
+                     <>
+                       <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                         <div className="w-24 h-24 rounded-full bg-primary/20 blur-xl" />
+                         <div className="w-32 h-32 rounded-full bg-secondary/20 blur-xl ml-12" />
+                       </div>
+                       <div className="absolute inset-0 flex items-center justify-center font-display font-bold text-4xl text-white/10 uppercase tracking-tighter">
+                         Project 0{project.id}
+                       </div>
+                     </>
+                   )}
                  </div>
                  <div className="absolute top-3 right-3 flex gap-2 z-10">
                     {project.github && (

@@ -35,7 +35,7 @@ export function Experience({ config }: ExperienceProps) {
         {portfolioData.experience.map((job, idx) => (
           <div key={job.id} className="relative group">
             {/* Timeline dot */}
-            <div className="absolute -left-[41px] md:-left-[59px] top-0 h-5 w-5 rounded-full bg-background border-2 border-primary group-hover:bg-primary group-hover:scale-125 transition-all duration-300 shadow-[0_0_10px_theme(colors.primary.DEFAULT)]" />
+            <div className={`absolute -left-[41px] md:-left-[59px] top-0 h-5 w-5 rounded-full border-2 border-primary transition-all duration-300 shadow-[0_0_10px_theme(colors.primary.DEFAULT)] ${job.id === 1 ? 'bg-primary scale-125' : 'bg-background'}`} />
             
             <div className="glass-panel p-6 md:p-8 rounded-xl relative overflow-hidden">
                <div className="absolute top-0 right-0 p-3 opacity-10 font-display text-9xl font-black text-white pointer-events-none">

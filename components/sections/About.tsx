@@ -1,10 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { SectionWrapper } from './SectionWrapper';
-import { Card, CardContent } from '@/components/ui/card';
-import { Terminal } from 'lucide-react';
 import profileData from '@/data/portfolio.json';
+import { motion } from 'framer-motion';
+import { Terminal } from 'lucide-react';
+import { SectionWrapper } from './SectionWrapper';
 
 interface AboutProps {
   config: {
@@ -26,7 +25,7 @@ export function About({ config }: AboutProps) {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider"
           >
             <Terminal className="w-3 h-3" />
-            USER_PROFILE_LOADED<span className="animate-pulse">_</span>
+            <span>USER_PROFILE_LOADED<span className="animate-pulse">_</span></span>
           </motion.div>
           <h2 className="text-4xl md:text-6xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">
             {config.title}
