@@ -54,7 +54,7 @@ export function Navbar() {
               ? "bg-black/60 backdrop-blur-xl border-white/10 shadow-lg" 
               : "bg-transparent border-transparent"
           )}>
-            <div className="flex items-center gap-2 font-display font-bold text-xl tracking-tighter cursor-pointer" onClick={() => scrollToSection('hero')}>
+            <div className="flex items-center gap-2 font-display font-bold text-xl tracking-tighter" onClick={() => scrollToSection('hero')}>
               <div className="w-8 h-8 px-6 rounded-lg bg-primary flex items-center justify-center text-white">
                 AD
               </div>

@@ -158,7 +158,7 @@ export function HeroRobot() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full h-full flex items-center justify-center relative cursor-pointer">
+    <div ref={containerRef} className="w-full h-full flex items-center justify-center relative">
       {/* Ambient background glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-64 h-64 md:w-96 md:h-96 rounded-full bg-primary/5 blur-3xl" />
