@@ -5,9 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { Mail, MapPin, Phone, Send, Radio } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, Radio, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import profileData from '@/data/portfolio.json';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { toast } from 'sonner';
+
+const contactFormSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+  subject: z.string().min(5, 'Subject must be at least 5 characters'),
+  message: z.string().min(10, 'Message must be at least 10 characters'),
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
 
 interface ContactProps {
   config: {
@@ -17,6 +30,42 @@ interface ContactProps {
 
 export function Contact({ config }: ContactProps) {
   const { profile } = profileData;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast.success('Message sent successfully!', {
+          description: "I'll get back to you soon.",
+        });
+        reset();
+      } else {
+        toast.error('Failed to send message', {
+          description: 'Please try again later.',
+        });
+      }
+    } catch {
+      toast.error('Network error', {
+        description: 'Please check your connection and try again.',
+      });
+    }
+  };
 
   return (
     <SectionWrapper id="contact" className="min-h-fit pb-10">
@@ -78,33 +127,67 @@ export function Contact({ config }: ContactProps) {
         </div>
 
         <Card className="glass-panel border-white/10 p-6 md:p-8">
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium">Name</label>
-                <Input placeholder="John Doe" className="bg-black/20 border-white/10 focus:border-primary/50" />
+                <Input
+                  {...register('name')}
+                  placeholder="John Doe"
+                  className="bg-black/20 border-white/10 focus:border-primary/50"
+                />
+                {errors.name && (
+                  <p className="text-xs text-red-500">{errors.name.message}</p>
+                )}
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Email</label>
-                <Input placeholder="john@example.com" type="email" className="bg-black/20 border-white/10 focus:border-primary/50" />
+                <Input
+                  {...register('email')}
+                  placeholder="john@example.com"
+                  type="email"
+                  className="bg-black/20 border-white/10 focus:border-primary/50"
+                />
+                {errors.email && (
+                  <p className="text-xs text-red-500">{errors.email.message}</p>
+                )}
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <label className="text-sm font-medium">Subject</label>
-              <Input placeholder="Project Inquiry" className="bg-black/20 border-white/10 focus:border-primary/50" />
+              <Input
+                {...register('subject')}
+                placeholder="Project Inquiry"
+                className="bg-black/20 border-white/10 focus:border-primary/50"
+              />
+              {errors.subject && (
+                <p className="text-xs text-red-500">{errors.subject.message}</p>
+              )}
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Message</label>
-              <Textarea 
-                placeholder="Tell me about your project..." 
-                className="min-h-[150px] bg-black/20 border-white/10 focus:border-primary/50 resize-none" 
+              <Textarea
+                {...register('message')}
+                placeholder="Tell me about your project..."
+                className="min-h-[150px] bg-black/20 border-white/10 focus:border-primary/50 resize-none"
               />
+              {errors.message && (
+                <p className="text-xs text-red-500">{errors.message.message}</p>
+              )}
             </div>
 
-            <Button className="w-full bg-primary hover:bg-primary/90 text-white font-bold h-12">
-              Send Message <Send className="w-4 h-4 ml-2" />
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-primary hover:bg-primary/90 text-white font-bold h-12"
+            >
+              {isSubmitting ? (
+                <>Sending... <Loader2 className="w-4 h-4 ml-2 animate-spin" /></>
+              ) : (
+                <>Send Message <Send className="w-4 h-4 ml-2" /></>
+              )}
             </Button>
           </form>
         </Card>
