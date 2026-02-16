@@ -1,8 +1,9 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { SectionWrapper } from './SectionWrapper';
 import portfolioData from '@/data/portfolio.json';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Activity } from 'lucide-react';
 
 interface ExperienceProps {
   config: {
@@ -13,6 +14,19 @@ interface ExperienceProps {
 export function Experience({ config }: ExperienceProps) {
   return (
     <SectionWrapper id="experience">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider mb-4"
+      >
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+        </span>
+        <Activity className="w-3 h-3" />
+        RUNTIME_LOG://CAREER_PATH
+      </motion.div>
       <h2 className="text-4xl md:text-6xl font-bold font-display mb-12 text-center md:text-left">
         {config.title}
       </h2>

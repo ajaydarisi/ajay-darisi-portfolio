@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, Radio } from 'lucide-react';
+import { motion } from 'framer-motion';
 import profileData from '@/data/portfolio.json';
 
 interface ContactProps {
@@ -18,9 +19,18 @@ export function Contact({ config }: ContactProps) {
   const { profile } = profileData;
 
   return (
-    <SectionWrapper id="contact" className="pb-32">
+    <SectionWrapper id="contact" className="min-h-fit pb-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
         <div>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider mb-4"
+          >
+            <Radio className="w-3 h-3" />
+            OPEN_CHANNEL<span className="animate-pulse">_</span>
+          </motion.div>
           <h2 className="text-4xl md:text-6xl font-bold font-display mb-6">
             {config.title}
           </h2>

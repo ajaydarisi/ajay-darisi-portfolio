@@ -30,7 +30,7 @@ const CATEGORY_ICONS: Record<string, any> = {
   "Cloud": <Layers className="w-5 h-5" />
 };
 
-export function Skills({ config }: SkillsProps) {
+export function Skills() {
   return (
     <SectionWrapper id="skills" className="relative">
       {/* Decorative background elements */}

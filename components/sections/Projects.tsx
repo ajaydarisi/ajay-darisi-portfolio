@@ -4,7 +4,8 @@ import { SectionWrapper } from './SectionWrapper';
 import portfolioData from '@/data/portfolio.json';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Rocket } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ProjectsProps {
   config: {
@@ -15,6 +16,15 @@ interface ProjectsProps {
 export function Projects({ config }: ProjectsProps) {
   return (
     <SectionWrapper id="projects">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider mb-4"
+      >
+        <Rocket className="w-3 h-3" />
+        DEPLOYING_MODULES<span className="animate-pulse">...</span>
+      </motion.div>
       <h2 className="text-4xl md:text-6xl font-bold font-display mb-12 text-center md:text-left">
         {config.title}
       </h2>
@@ -40,13 +50,15 @@ export function Projects({ config }: ProjectsProps) {
                    </div>
                  </div>
                  <div className="absolute top-3 right-3 flex gap-2 z-10">
-                    <a href="#" className="group/code flex items-center rounded-full bg-black/60 backdrop-blur-sm border border-white/10 hover:bg-black/80 px-2.5 py-2 transition-all duration-300">
+                    {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="group/code flex items-center rounded-full bg-black/60 backdrop-blur-sm border border-white/10 hover:bg-black/80 px-2.5 py-2 transition-all duration-300">
                       <Github className="w-4 h-4 shrink-0" />
                       <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium group-hover/code:max-w-[60px] group-hover/code:ml-1.5 transition-all duration-300">
                         Code
                       </span>
                     </a>
-                    {'link' in project && project.link && (
+                    )}
+                    {project.link && (
                     <a href={project.link} target="_blank" rel="noopener noreferrer" className="group/demo flex items-center rounded-full bg-black/60 backdrop-blur-sm border border-white/10 hover:bg-black/80 px-2.5 py-2 transition-all duration-300">
                       <ExternalLink className="w-4 h-4 shrink-0" />
                       <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium group-hover/demo:max-w-[80px] group-hover/demo:ml-1.5 transition-all duration-300">

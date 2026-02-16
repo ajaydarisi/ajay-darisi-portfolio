@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Orbitron, Rajdhani, Inter } from 'next/font/google';
+import { Orbitron, Poppins } from 'next/font/google';
 import { Providers } from '@/components/providers';
 import './globals.css';
 
@@ -9,16 +9,10 @@ const orbitron = Orbitron({
   display: 'swap',
 });
 
-const rajdhani = Rajdhani({
+const poppins = Poppins({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-rajdhani',
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-poppins',
   display: 'swap',
 });
 
@@ -48,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${orbitron.variable} ${rajdhani.variable} ${inter.variable}`}>
+    <html lang="en" className={`dark ${orbitron.variable} ${poppins.variable}`}>
       <body>
         <Providers>
           {children}

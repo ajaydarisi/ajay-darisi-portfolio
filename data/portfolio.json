@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "Ajay Darisi",
-    "role": "Software Developer / Full Stack Developer",
+    "role": "Software Developer",
     "location": "Bengaluru, India",
     "email": "ajaydarisi5@gmail.com",
     "phone": "+91 8328031546",
@@ -11,6 +11,14 @@
       "linkedin": "https://linkedin.com/in/ajaydarisi",
       "twitter": "https://twitter.com/ajaydarisi"
     }
+  },
+  "about": {
+    "stats": [
+      { "label": "Experience", "value": "3+ Years" },
+      { "label": "Projects", "value": "10+" },
+      { "label": "Users Impacted", "value": "1M+" },
+      { "label": "Uptime", "value": "99.9%" }
+    ]
   },
   "sections": [
     { "id": "hero", "type": "hero", "config": { "title": "Ajay Darisi", "subtitle": "Full Stack Developer", "tagline": "Building the future of web" } },
@@ -27,14 +35,14 @@
     },
     {
       "category": "Backend",
-      "items": ["NestJS", "ExpressJS", "NodeJS", "Supabase", "FeathersJS", "PostgreSQL", "REST APIs"]
+      "items": ["NestJS", "ExpressJS", "NodeJS", "Supabase", "PostgreSQL"]
     },
     {
       "category": "Languages",
       "items": ["TypeScript", "JavaScript", "Python", "Java"]
     },
     {
-      "category": "Integrations",
+      "category": "Payment Integrations",
       "items": ["Stripe", "PayPal", "CorvusPay", "GoldenPay", "Tap2Pay"]
     },
     {
@@ -85,6 +93,7 @@
       "id": 1,
       "title": "Snapshots App",
       "tech": ["ReactJS", "Firebase", "CSS"],
+      "github": "https://github.com/ajaydarisi/snapshots",
       "link": "https://snapshot-57a24.web.app/",
       "description": "Built a responsive app for securely uploading, previewing, storing, and managing photos using Firebase Storage, Realtime Database, and Authentication. Implemented smooth CRUD operations and optimized image handling for an improved user experience."
     },
@@ -92,14 +101,16 @@
       "id": 2,
       "title": "DevMarket",
       "tech": ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "shadcn/ui"],
-      "link": "https://github.com/ajaydarisi/market-place",
+      "github": "https://github.com/ajaydarisi/market-place",
+      "link": "https://market-place-for-websites.vercel.app/",
       "description": "A two-sided marketplace connecting clients with developers for freelance projects. Clients post projects with budgets and categories, developers browse and submit proposals, and both sides communicate through built-in messaging. Features role-based onboarding, real-time notifications, and Supabase-powered authentication."
     },
     {
       "id": 3,
       "title": "TexLedger",
       "tech": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
-      "link": "https://github.com/ajaydarisi/Textile-Inventory-Manager",
+      "github": "https://github.com/ajaydarisi/Textile-Inventory-Manager",
+      "link": "https://textile-inventory-app.vercel.app/",
       "description": "A Tally-like accounting and inventory management system for textile wholesalers. Features journal-based double-entry accounting with strict debit-credit validation, stock tracking via movement events, voucher management (purchase, sales, receipt, payment), and financial reports including trial balance and profit/loss. Uses PostgreSQL functions for accounting logic and Row Level Security for company-level data isolation."
     }
   ]
