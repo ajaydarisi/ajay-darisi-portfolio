@@ -90,21 +90,17 @@
     },
     {
       "id": 2,
-      "title": "Translation System",
-      "tech": ["NextJS", "NodeJS", "PostgreSQL"],
-      "description": "Enterprise translation management system supporting 50+ languages for global content."
+      "title": "DevMarket",
+      "tech": ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "shadcn/ui"],
+      "link": "https://github.com/ajaydarisi/market-place",
+      "description": "A two-sided marketplace connecting clients with developers for freelance projects. Clients post projects with budgets and categories, developers browse and submit proposals, and both sides communicate through built-in messaging. Features role-based onboarding, real-time notifications, and Supabase-powered authentication."
     },
     {
       "id": 3,
-      "title": "Payment Wrapper",
-      "tech": ["TypeScript", "Stripe", "Express"],
-      "description": "Unified payment gateway wrapper simplifying integration for multiple providers."
-    },
-    {
-      "id": 4,
-      "title": "Fundraising Platform",
-      "tech": ["Refine", "Supabase", "Material UI"],
-      "description": "SaaS platform for managing fundraising campaigns and donor relationships."
+      "title": "TexLedger",
+      "tech": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
+      "link": "https://github.com/ajaydarisi/Textile-Inventory-Manager",
+      "description": "A Tally-like accounting and inventory management system for textile wholesalers. Features journal-based double-entry accounting with strict debit-credit validation, stock tracking via movement events, voucher management (purchase, sales, receipt, payment), and financial reports including trial balance and profit/loss. Uses PostgreSQL functions for accounting logic and Row Level Security for company-level data isolation."
     }
   ]
 }
