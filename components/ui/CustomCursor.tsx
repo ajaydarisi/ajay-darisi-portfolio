@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   motion,
   useMotionValue,
@@ -14,7 +14,7 @@ const INTERACTIVE_SELECTORS =
 export function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const coordsRef = useRef<HTMLSpanElement>(null);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -35,7 +35,9 @@ export function CustomCursor() {
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-      setMousePos({ x: e.clientX, y: e.clientY });
+      if (coordsRef.current) {
+        coordsRef.current.textContent = `X:${e.clientX.toString().padStart(4, '0')} Y:${e.clientY.toString().padStart(4, '0')}`;
+      }
       if (!isVisible) setIsVisible(true);
     };
 
@@ -139,10 +141,7 @@ export function CustomCursor() {
           {isHovering ? (
             <span style={{ color: 'hsl(260 100% 70%)' }}>[TARGET_LOCKED]</span>
           ) : (
-            <>
-              X:{mousePos.x.toString().padStart(4, '0')} Y:
-              {mousePos.y.toString().padStart(4, '0')}
-            </>
+            <span ref={coordsRef}>X:0000 Y:0000</span>
           )}
         </motion.div>
       </div>
