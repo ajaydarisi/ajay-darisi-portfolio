@@ -1,10 +1,11 @@
 'use client';
 
 import { SectionWrapper } from './SectionWrapper';
-import { HeroRobot } from '../canvas/HeroRobot';
 import { Button } from '@/components/ui/button';
+import portfolioData from '@/data/portfolio.json';
 import { ArrowRight, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface HeroProps {
   config: {
@@ -15,68 +16,79 @@ interface HeroProps {
 }
 
 export function Hero({ config }: HeroProps) {
+  const { about, profile } = portfolioData;
+
   return (
-    <SectionWrapper id="hero" className="justify-center items-center min-h-[100dvh]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center h-full w-full">
-        <div className="flex flex-col gap-4 md:gap-6 z-20 order-2 md:order-1 text-center md:text-left">
+    <SectionWrapper id="hero" className="min-h-[100svh] flex items-center pt-24 pb-10 md:pt-28 md:pb-12 lg:pt-28 lg:pb-10">
+      <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="space-y-6">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2 justify-center md:justify-start"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="space-y-4"
           >
-            <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider">
-              SYSTEM_ONLINE_
-            </span>
+            <p className="section-eyebrow">{profile.name}</p>
+            <h1 className="max-w-3xl text-balance font-display text-5xl font-extrabold leading-[0.98] text-foreground sm:text-6xl lg:text-6xl xl:text-7xl">
+              Software engineer building scalable web platforms.
+            </h1>
+            <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
+              I design and engineer dependable product experiences across admin systems,
+              payment flows, localization platforms, and Supabase-backed applications.
+            </p>
           </motion.div>
 
-          <div className="space-y-2">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 neon-text">
-              {config.title.toUpperCase()}
-            </h1>
-            <h2 className="text-2xl md:text-3xl text-secondary font-bold tracking-[0.2em] font-display">
-              {config.subtitle}
-            </h2>
-          </div>
-
-          <p className="text-lg text-muted-foreground max-w-md mx-auto md:mx-0 font-light leading-relaxed">
-            {config.tagline}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-white rounded-none border border-primary/50 relative overflow-hidden group px-5 py-3 md:px-8 md:py-6"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <span className="relative z-10 flex items-center gap-2 font-display text-sm md:text-lg tracking-widest">
-                INITIALIZE_ <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              Start a Conversation <ArrowRight className="h-4 w-4" />
             </Button>
 
-            <Button size="lg" variant="outline" className="rounded-none border-white/10 hover:bg-white/5 backdrop-blur-sm group px-5 py-3 md:px-8 md:py-6" asChild>
+            <Button size="lg" variant="outline" asChild>
               <a href="/Resume.pdf" download>
-                <span className="flex items-center gap-2 font-display text-sm md:text-lg tracking-widest">
-                  ARCHIVE_ <Download className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-                </span>
+                Download Resume <Download className="h-4 w-4" />
               </a>
             </Button>
           </div>
+
+          <div className="grid grid-cols-3 gap-3 border-y border-border py-5 sm:max-w-xl">
+            {about.stats.slice(0, 3).map((stat) => (
+              <div key={stat.label}>
+                <p className="text-2xl font-extrabold tabular-nums text-foreground md:text-3xl">{stat.value}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="h-[40vh] md:h-[90vh] w-full order-1 md:order-2 relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 pointer-events-none md:hidden" />
-          <HeroRobot />
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.65 }}
+          className="relative mx-auto w-full max-w-[420px] lg:mr-0"
+        >
+          <div className="premium-card relative aspect-[4/5] max-h-[calc(100svh-220px)] overflow-hidden rounded-lg p-2">
+            <div className="relative h-full overflow-hidden rounded-md bg-muted">
+              <Image
+                src="/Ajay.jpeg"
+                alt={`${config.title}, ${config.subtitle}`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 420px, 90vw"
+                className="object-cover object-center"
+              />
+            </div>
+          </div>
+          <div className="absolute -bottom-5 left-5 right-5 rounded-lg border border-border bg-card/95 p-3 shadow-xl backdrop-blur">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Current focus</p>
+            <p className="mt-1.5 text-base font-bold text-foreground">
+              Shipping reliable web products for global teams.
+            </p>
+          </div>
+        </motion.div>
       </div>
-
-      <motion.div
-        animate={{ y: [0, 10, 0], opacity: [0.2, 0.5, 0.2] }}
-        transition={{ repeat: Infinity, duration: 3 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-primary"
-      >
-        <div className="w-px h-24 bg-gradient-to-b from-transparent via-primary to-transparent" />
-      </motion.div>
     </SectionWrapper>
   );
 }

@@ -1,11 +1,11 @@
 {
   "profile": {
     "name": "Ajay Darisi",
-    "role": "Software Developer",
+    "role": "Software Engineer",
     "location": "Bengaluru, India",
     "email": "ajaydarisi5@gmail.com",
     "phone": "+91 8328031546",
-    "objective": "Seeking a Software Developer position to leverage my 3 years of experience in web development and team management to build innovative and efficient applications.",
+    "objective": "Software engineer with 3+ years of experience building scalable web applications, admin systems, payment workflows, and polished user interfaces.",
     "socials": {
       "github": "https://github.com/ajaydarisi",
       "linkedin": "https://linkedin.com/in/ajaydarisi",
@@ -21,9 +21,9 @@
     ]
   },
   "sections": [
-    { "id": "hero", "type": "hero", "config": { "title": "Ajay Darisi", "subtitle": "Full Stack Developer", "tagline": "Building the future of web" } },
+    { "id": "hero", "type": "hero", "config": { "title": "Ajay Darisi", "subtitle": "Software Engineer", "tagline": "Building scalable web platforms with clarity and craft." } },
     { "id": "about", "type": "about", "config": { "title": "About Me" } },
-    { "id": "skills", "type": "skills", "config": { "title": "Technical Arsenal" } },
+    { "id": "skills", "type": "skills", "config": { "title": "Technical Expertise" } },
     { "id": "experience", "type": "experience", "config": { "title": "Experience" } },
     { "id": "projects", "type": "projects", "config": { "title": "Featured Projects" } },
     { "id": "contact", "type": "contact", "config": { "title": "Get in Touch" } }
@@ -61,7 +61,7 @@
   "experience": [
     {
       "id": 1,
-      "role": "Developer",
+      "role": "Software Engineer",
       "company": "Sumeru Technology Solutions",
       "location": "Bengaluru, IN",
       "period": "July 2023 - Present",
@@ -77,7 +77,7 @@
     },
     {
       "id": 2,
-      "role": "Web Developer",
+      "role": "Software Engineer",
       "company": "Saptarishi Solutions",
       "location": "Hyderabad, IN",
       "period": "Jan 2023 - June 2023",

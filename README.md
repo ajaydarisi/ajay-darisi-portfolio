@@ -1,19 +1,20 @@
 # Ajay Darisi — Portfolio
 
-A modern, interactive portfolio website built with Next.js 15, featuring 3D graphics, smooth animations, and a cyberpunk-inspired dark theme.
+A modern, light, professional portfolio website built with Next.js 15. The interface focuses on clear positioning, selected work, measurable experience, and a refined minimal visual system.
 
 ## Tech Stack
 
 - **Framework:** Next.js 15 / React 19 / TypeScript
-- **3D Graphics:** Three.js, React Three Fiber, Drei
 - **Styling:** Tailwind CSS 4, shadcn/ui, Framer Motion
 - **State:** Zustand
-- **Fonts:** Orbitron, Rajdhani, Inter
+- **Fonts:** Playfair Display, DM Sans
 
 ## Features
 
-- Interactive 3D hero scene with animated robot and particle effects
-- Glassmorphism UI with neon glow effects
+- Light modern-minimal interface with professional typography
+- Portrait-led hero with proof points and clear calls to action
+- Case-study style project cards with screenshots, links, and tech stacks
+- Polished experience timeline and grouped technical expertise
 - Scroll-triggered animations via Framer Motion
 - Fully responsive with mobile navigation
 - Data-driven sections — edit JSON files to update content
@@ -39,7 +40,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ```
 app/                  # Next.js app router (layout, pages, styles)
 components/
-  canvas/             # 3D scenes (Three.js / R3F)
   sections/           # Portfolio sections (Hero, About, Skills, etc.)
   layout/             # Navbar
   ui/                 # shadcn/ui components

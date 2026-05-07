@@ -4,14 +4,21 @@ import { SectionWrapper } from './SectionWrapper';
 import portfolioData from '@/data/portfolio.json';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Github, Rocket } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, Github, LayoutPanelTop } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface ProjectsProps {
   config: {
     title: string;
   };
 }
+
+const PROJECT_TYPES: Record<number, string> = {
+  1: 'Commerce and mobile-ready product',
+  2: 'Two-sided marketplace',
+  3: 'Accounting and inventory platform',
+};
 
 export function Projects({ config }: ProjectsProps) {
   return (
@@ -20,85 +27,95 @@ export function Projects({ config }: ProjectsProps) {
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider mb-4"
+        className="section-eyebrow mb-4 flex items-center gap-2"
       >
-        <Rocket className="w-3 h-3" />
-        <span>DEPLOYING_MODULES<span className="animate-pulse">...</span></span>
+        <LayoutPanelTop className="h-4 w-4" />
+        Selected Work
       </motion.div>
-      <h2 className="text-4xl md:text-6xl font-bold font-display mb-12 text-center md:text-left">
-        {config.title}
-      </h2>
+      <div className="mb-14 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
+          {config.title}
+        </h2>
+        <p className="max-w-xl text-base leading-7 text-muted-foreground">
+          Product builds that combine polished interfaces, data-heavy workflows, authentication,
+          payments, and real operational use cases.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {portfolioData.projects.map((project) => (
-          <div 
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        {portfolioData.projects.map((project, idx) => (
+          <motion.article
             key={project.id} 
-            className="group relative"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.08, duration: 0.5 }}
+            viewport={{ once: true }}
+            className="group"
           >
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-20 group-hover:opacity-60 transition duration-500" />
-            
-            <Card className="relative h-full bg-card border-white/10 overflow-hidden flex flex-col">
-              <div className="h-48 w-full bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
-                 <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-700">
-                   {project.image ? (
-                     <img
-                       src={project.image}
-                       alt={project.title}
-                       className="w-full h-full object-cover object-top grayscale-0 md:grayscale md:group-hover:grayscale-0 transition-all duration-700"
-                     />
-                   ) : (
-                     <>
-                       <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                         <div className="w-24 h-24 rounded-full bg-primary/20 blur-xl" />
-                         <div className="w-32 h-32 rounded-full bg-secondary/20 blur-xl ml-12" />
-                       </div>
-                       <div className="absolute inset-0 flex items-center justify-center font-display font-bold text-4xl text-white/10 uppercase tracking-tighter">
-                         Project 0{project.id}
-                       </div>
-                     </>
-                   )}
-                 </div>
-                 <div className="absolute top-3 right-3 flex gap-2 z-10">
-                    {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="group/code flex items-center rounded-full bg-black/60 backdrop-blur-sm border border-white/10 hover:bg-black/80 px-2.5 py-2 transition-all duration-300">
-                      <Github className="w-4 h-4 shrink-0" />
-                      <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium group-hover/code:max-w-[60px] group-hover/code:ml-1.5 transition-all duration-300">
-                        Code
-                      </span>
-                    </a>
-                    )}
-                    {project.link && (
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="group/demo flex items-center rounded-full bg-black/60 backdrop-blur-sm border border-white/10 hover:bg-black/80 px-2.5 py-2 transition-all duration-300">
-                      <ExternalLink className="w-4 h-4 shrink-0" />
-                      <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium group-hover/demo:max-w-[80px] group-hover/demo:ml-1.5 transition-all duration-300">
-                        Live Demo
-                      </span>
-                    </a>
-                    )}
-                 </div>
+            <Card className="premium-card flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border bg-muted">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top transition duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center text-2xl font-bold text-muted-foreground">
+                    Project 0{project.id}
+                  </div>
+                )}
               </div>
               
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-white group-hover:text-primary transition-colors">
+              <CardHeader className="pb-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                  {PROJECT_TYPES[project.id] || 'Product build'}
+                </p>
+                <CardTitle className="text-2xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary">
                   {project.title}
                 </CardTitle>
               </CardHeader>
               
-              <CardContent className="flex-grow">
-                <p className="text-muted-foreground mb-6">
+              <CardContent className="flex flex-grow flex-col">
+                <p className="mb-6 text-sm leading-6 text-muted-foreground">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="mt-auto flex flex-wrap gap-2">
                   {project.tech.map((t, i) => (
-                    <Badge key={i} variant="secondary" className="bg-white/5 hover:bg-white/10 text-secondary border-none">
+                    <Badge key={i} variant="secondary" className="rounded-md border border-border bg-muted/70 text-muted-foreground hover:bg-muted">
                       {t}
                     </Badge>
                   ))}
                 </div>
+
+                <div className="mt-7 flex gap-3 border-t border-border pt-5">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-foreground transition hover:text-primary"
+                    >
+                      Live <ExternalLink className="h-4 w-4" />
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition hover:text-primary"
+                    >
+                      Code <Github className="h-4 w-4" />
+                    </a>
+                  )}
+                  <ArrowUpRight className="ml-auto h-5 w-5 text-muted-foreground transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                </div>
               </CardContent>
-              
             </Card>
-          </div>
+          </motion.article>
         ))}
       </div>
     </SectionWrapper>

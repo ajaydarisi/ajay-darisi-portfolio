@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Command } from 'lucide-react';
+import { Download, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/lib/store';
 import portfolioData from '@/data/portfolio.json';
@@ -13,9 +13,18 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { activeSection, setActiveSection, setIsScrollingTo } = useUIStore();
 
-  const links = portfolioData.sections.map(s => ({
-    id: s.id,
-    label: s.config.title || s.type
+  const sectionLabels: Record<string, string> = {
+    hero: 'Home',
+    about: 'About',
+    skills: 'Expertise',
+    experience: 'Experience',
+    projects: 'Work',
+    contact: 'Contact',
+  };
+
+  const links = portfolioData.sections.map((section) => ({
+    id: section.id,
+    label: sectionLabels[section.id] || section.config.title || section.type,
   }));
 
   useEffect(() => {
@@ -44,42 +53,59 @@ export function Navbar() {
         animate={{ y: 0 }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled ? "py-4" : "py-6"
+          scrolled ? "py-3" : "py-5"
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <nav className={cn(
-            "flex items-center justify-between px-6 py-3 rounded-full border transition-all duration-300",
+            "flex items-center justify-between border px-4 py-3 transition-all duration-300 md:px-5",
             scrolled 
-              ? "bg-black/60 backdrop-blur-xl border-white/10 shadow-lg" 
-              : "bg-transparent border-transparent"
+              ? "bg-background/90 backdrop-blur-xl border-border/80 shadow-sm"
+              : "bg-background/65 backdrop-blur-md border-border/60"
           )}>
-            <div className="flex items-center gap-2 font-display font-bold text-xl tracking-tighter" onClick={() => scrollToSection('hero')}>
-              <div className="w-8 h-8 px-6 rounded-lg bg-primary flex items-center justify-center text-white">
+            <button
+              className="flex items-center gap-3 text-left"
+              onClick={() => scrollToSection('hero')}
+              aria-label="Go to top"
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-sm font-bold text-background shadow-sm">
                 AD
-              </div>
-              <span className="hidden sm:inline-block">AJAY DARISI</span>
-            </div>
+              </span>
+              <span className="hidden leading-tight sm:block">
+                <span className="block text-sm font-extrabold text-foreground">Ajay Darisi</span>
+                <span className="block text-xs font-medium text-muted-foreground">Software Engineer</span>
+              </span>
+            </button>
 
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/5">
+            <div className="hidden items-center gap-6 md:flex">
               {links.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
                   className={cn(
-                    "px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300",
+                    "relative py-2 text-sm font-semibold transition-colors duration-200",
                     activeSection === link.id 
-                      ? "bg-primary text-white shadow-lg shadow-primary/25" 
-                      : "text-muted-foreground hover:text-white hover:bg-white/5"
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {link.label}
+                  <span
+                    className={cn(
+                      "absolute inset-x-0 -bottom-1 h-px origin-left bg-primary transition-transform duration-300",
+                      activeSection === link.id ? "scale-x-100" : "scale-x-0"
+                    )}
+                  />
                 </button>
               ))}
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" className="hidden md:inline-flex" asChild>
+                <a href="/Resume.pdf" download>
+                  Resume <Download className="h-4 w-4" />
+                </a>
+              </Button>
               <Button 
                 variant="ghost" 
                 size="icon" 
@@ -100,18 +126,26 @@ export function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl pt-32 px-8 md:hidden"
+            className="fixed inset-0 z-40 bg-background/95 px-6 pt-28 backdrop-blur-xl md:hidden"
           >
-            <div className="flex flex-col gap-6">
+            <div className="mx-auto flex max-w-sm flex-col gap-2">
               {links.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="text-3xl font-display font-bold text-left text-muted-foreground hover:text-white hover:pl-4 transition-all"
+                  className={cn(
+                    "border-b border-border/70 py-4 text-left text-2xl font-bold transition-colors",
+                    activeSection === link.id ? "text-foreground" : "text-muted-foreground"
+                  )}
                 >
                   {link.label}
                 </button>
               ))}
+              <Button className="mt-6" asChild>
+                <a href="/Resume.pdf" download>
+                  Download Resume <Download className="h-4 w-4" />
+                </a>
+              </Button>
             </div>
           </motion.div>
         )}

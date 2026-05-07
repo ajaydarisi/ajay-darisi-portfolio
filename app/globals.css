@@ -36,111 +36,111 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  --color-primary-border: hsl(var(--primary-border));
+  --color-secondary-border: hsl(var(--secondary-border));
+  --color-button-outline: hsl(var(--button-outline));
+  --color-badge-outline: hsl(var(--badge-outline));
 
-  --font-sans: var(--font-poppins), 'Poppins', sans-serif;
-  --font-display: var(--font-orbitron), 'Orbitron', sans-serif;
-  --font-body: var(--font-poppins), 'Poppins', sans-serif;
+  --font-sans: var(--font-dm-sans), 'DM Sans', sans-serif;
+  --font-display: var(--font-playfair-display), 'Playfair Display', serif;
+  --font-body: var(--font-dm-sans), 'DM Sans', sans-serif;
 }
 
-/* DARK FUTURISTIC THEME - NEON GLOW & GLASSMORPHISM */
 :root {
-  --background: 240 10% 4%;
-  --foreground: 0 0% 98%;
+  --background: 38 28% 98%;
+  --foreground: 220 24% 14%;
 
-  --card: 240 10% 6%;
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 24% 14%;
 
-  --popover: 240 10% 4%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 24% 14%;
 
-  --primary: 260 100% 60%; /* Neon Purple */
-  --primary-foreground: 0 0% 100%;
+  --primary: 34 36% 34%;
+  --primary-foreground: 42 35% 98%;
+  --primary-border: 34 32% 26%;
 
-  --secondary: 180 100% 50%; /* Cyan Neon */
-  --secondary-foreground: 240 10% 4%;
+  --secondary: 205 18% 92%;
+  --secondary-foreground: 218 22% 22%;
+  --secondary-border: 205 16% 82%;
 
-  --muted: 240 10% 12%;
-  --muted-foreground: 240 5% 65%;
+  --muted: 38 22% 94%;
+  --muted-foreground: 218 11% 42%;
 
-  --accent: 260 50% 15%;
-  --accent-foreground: 0 0% 98%;
+  --accent: 36 30% 91%;
+  --accent-foreground: 220 24% 14%;
 
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
+  --destructive: 0 72% 48%;
+  --destructive-foreground: 0 0% 100%;
 
-  --border: 240 10% 15%;
-  --input: 240 10% 15%;
-  --ring: 260 100% 60%;
+  --border: 38 16% 84%;
+  --input: 38 16% 84%;
+  --ring: 34 36% 34%;
+  --button-outline: 38 16% 78%;
+  --badge-outline: 38 16% 78%;
 
   --radius: 0.5rem;
 }
 
 .dark {
-  /* Same as root because we are forcing dark theme for this portfolio */
-  --background: 240 10% 4%;
-  --foreground: 0 0% 98%;
-  --card: 240 10% 6%;
-  --card-foreground: 0 0% 98%;
-  --primary: 260 100% 60%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 180 100% 50%;
-  --secondary-foreground: 240 10% 4%;
-  --muted: 240 10% 12%;
-  --muted-foreground: 240 5% 65%;
-  --accent: 260 50% 15%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 10% 15%;
-  --input: 240 10% 15%;
-  --ring: 260 100% 60%;
+  --background: 38 28% 98%;
+  --foreground: 220 24% 14%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 24% 14%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 24% 14%;
+  --primary: 34 36% 34%;
+  --primary-foreground: 42 35% 98%;
+  --primary-border: 34 32% 26%;
+  --secondary: 205 18% 92%;
+  --secondary-foreground: 218 22% 22%;
+  --secondary-border: 205 16% 82%;
+  --muted: 38 22% 94%;
+  --muted-foreground: 218 11% 42%;
+  --accent: 36 30% 91%;
+  --accent-foreground: 220 24% 14%;
+  --destructive: 0 72% 48%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 38 16% 84%;
+  --input: 38 16% 84%;
+  --ring: 34 36% 34%;
+  --button-outline: 38 16% 78%;
+  --badge-outline: 38 16% 78%;
 }
 
 @layer base {
   html {
-    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  html::-webkit-scrollbar {
-    display: none;
   }
   * {
     @apply border-border;
-    cursor: none;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  *::-webkit-scrollbar {
-    display: none;
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    background-image:
-      radial-gradient(circle at 50% 0%, hsl(260 100% 10% / 0.5), transparent 70%),
-      radial-gradient(circle at 80% 50%, hsl(180 100% 5% / 0.3), transparent 50%);
+    background:
+      linear-gradient(180deg, hsl(38 28% 98%) 0%, hsl(205 18% 96%) 45%, hsl(38 20% 97%) 100%);
     min-height: 100vh;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-wider;
   }
 }
 
 @layer utilities {
-  .glass-panel {
-    @apply bg-black/40 backdrop-blur-md border border-white/10 shadow-xl;
+  .premium-card {
+    background: hsl(var(--card) / 0.92);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 24px 70px hsl(220 24% 14% / 0.08);
   }
 
-  .neon-text {
-    text-shadow: 0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3);
+  .soft-card {
+    background: hsl(var(--card) / 0.78);
+    border: 1px solid hsl(var(--border) / 0.8);
+    box-shadow: 0 16px 44px hsl(220 24% 14% / 0.06);
   }
 
-  .neon-border {
-    box-shadow: 0 0 10px hsl(var(--primary) / 0.2), inset 0 0 10px hsl(var(--primary) / 0.1);
+  .section-eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.16em] text-primary;
   }
 
-  .text-glow {
-    text-shadow: 0 0 10px currentColor;
+  .text-balance {
+    text-wrap: balance;
   }
 }

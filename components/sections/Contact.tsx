@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { Mail, MapPin, Phone, Send, Radio, Loader2 } from 'lucide-react';
+import { Loader2, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 import profileData from '@/data/portfolio.json';
 import { useForm } from 'react-hook-form';
@@ -68,85 +68,86 @@ export function Contact({ config }: ContactProps) {
   };
 
   return (
-    <SectionWrapper id="contact" className="min-h-fit pb-10">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+    <SectionWrapper id="contact" className="pb-16">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider mb-4"
+            className="section-eyebrow mb-4"
           >
-            <Radio className="w-3 h-3" />
-            <span>OPEN_CHANNEL<span className="animate-pulse">_</span></span>
+            Contact
           </motion.div>
-          <h2 className="text-4xl md:text-6xl font-bold font-display mb-6">
+          <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
             {config.title}
           </h2>
-          <p className="text-xl text-muted-foreground mb-12 font-light">
-            Ready to start a project? Let's build something amazing together.
+          <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
+            Have a product, platform, or workflow that needs thoughtful engineering?
+            Send a note and I will respond with next steps.
           </p>
 
-          <div className="space-y-8">
+          <div className="mt-10 space-y-6">
             <div className="flex items-center gap-4 group">
-              <div className="h-12 w-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+              <div className="flex h-11 w-11 items-center justify-center rounded-md bg-accent text-primary transition group-hover:bg-primary group-hover:text-primary-foreground">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Email</p>
-                <a href={`mailto:${profile.email}`} className="text-lg font-medium hover:text-primary transition-colors">
+                <a href={`mailto:${profile.email}`} className="font-semibold text-foreground transition-colors hover:text-primary">
                   {profile.email}
                 </a>
               </div>
             </div>
 
             <div className="flex items-center gap-4 group">
-              <div className="h-12 w-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+              <div className="flex h-11 w-11 items-center justify-center rounded-md bg-accent text-primary transition group-hover:bg-primary group-hover:text-primary-foreground">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Phone</p>
-                <a href={`tel:${profile.phone}`} className="text-lg font-medium hover:text-primary transition-colors">
+                <a href={`tel:${profile.phone}`} className="font-semibold text-foreground transition-colors hover:text-primary">
                   {profile.phone}
                 </a>
               </div>
             </div>
 
             <div className="flex items-center gap-4 group">
-              <div className="h-12 w-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+              <div className="flex h-11 w-11 items-center justify-center rounded-md bg-accent text-primary transition group-hover:bg-primary group-hover:text-primary-foreground">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Location</p>
-                <p className="text-lg font-medium">
+                <p className="font-semibold text-foreground">
                   {profile.location}
                 </p>
               </div>
             </div>
           </div>
+
         </div>
 
-        <Card className="glass-panel border-white/10 p-6 md:p-8">
+        <Card className="premium-card p-6 md:p-8">
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <label className="text-sm font-medium">Name</label>
+                <label className="text-sm font-semibold text-foreground">Name</label>
                 <Input
                   {...register('name')}
                   placeholder="John Doe"
-                  className="bg-black/20 border-white/10 focus:border-primary/50"
+                  className="border-border bg-background/70 focus-visible:ring-ring/20"
                 />
                 {errors.name && (
                   <p className="text-xs text-red-500">{errors.name.message}</p>
                 )}
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium">Email</label>
+                <label className="text-sm font-semibold text-foreground">Email</label>
                 <Input
                   {...register('email')}
                   placeholder="john@example.com"
                   type="email"
-                  className="bg-black/20 border-white/10 focus:border-primary/50"
+                  className="border-border bg-background/70 focus-visible:ring-ring/20"
                 />
                 {errors.email && (
                   <p className="text-xs text-red-500">{errors.email.message}</p>
@@ -155,11 +156,11 @@ export function Contact({ config }: ContactProps) {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Subject</label>
+              <label className="text-sm font-semibold text-foreground">Subject</label>
               <Input
                 {...register('subject')}
                 placeholder="Project Inquiry"
-                className="bg-black/20 border-white/10 focus:border-primary/50"
+                className="border-border bg-background/70 focus-visible:ring-ring/20"
               />
               {errors.subject && (
                 <p className="text-xs text-red-500">{errors.subject.message}</p>
@@ -167,11 +168,11 @@ export function Contact({ config }: ContactProps) {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Message</label>
+              <label className="text-sm font-semibold text-foreground">Message</label>
               <Textarea
                 {...register('message')}
                 placeholder="Tell me about your project..."
-                className="min-h-[150px] bg-black/20 border-white/10 focus:border-primary/50 resize-none"
+                className="min-h-[160px] resize-none border-border bg-background/70 focus-visible:ring-ring/20"
               />
               {errors.message && (
                 <p className="text-xs text-red-500">{errors.message.message}</p>
@@ -181,7 +182,7 @@ export function Contact({ config }: ContactProps) {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-primary hover:bg-primary/90 text-white font-bold h-12"
+              className="h-12 w-full"
             >
               {isSubmitting ? (
                 <>Sending... <Loader2 className="w-4 h-4 ml-2 animate-spin" /></>

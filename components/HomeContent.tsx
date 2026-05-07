@@ -8,6 +8,7 @@ import { Experience } from '@/components/sections/Experience';
 import { Projects } from '@/components/sections/Projects';
 import { Contact } from '@/components/sections/Contact';
 import portfolioData from '@/data/portfolio.json';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const SECTION_COMPONENTS: Record<string, React.ComponentType<any>> = {
   hero: Hero,
@@ -19,8 +20,10 @@ const SECTION_COMPONENTS: Record<string, React.ComponentType<any>> = {
 };
 
 export default function HomeContent() {
+  const { profile } = portfolioData;
+
   return (
-    <main className="bg-background min-h-screen text-foreground selection:bg-primary/30 selection:text-white">
+    <main className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-foreground">
       <Navbar />
 
       <div className="flex flex-col gap-0">
@@ -34,8 +37,27 @@ export default function HomeContent() {
         })}
       </div>
 
-      <footer className="py-8 text-center text-sm text-muted-foreground border-t border-white/5 bg-black/20">
-        <p>&copy; {new Date().getFullYear()} Ajay Darisi. Built with ❤️</p>
+      <footer className="border-t border-border bg-card/60 px-4 py-8 text-sm text-muted-foreground sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="font-semibold text-foreground">&copy; {new Date().getFullYear()} {profile.name}</p>
+            <p className="mt-1">{profile.location} - Available for selected product work</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 transition hover:text-primary">
+              <Mail className="h-4 w-4" />
+              Email
+            </a>
+            <a href={profile.socials.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-primary">
+              <Github className="h-4 w-4" />
+              GitHub
+            </a>
+            <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-primary">
+              <Linkedin className="h-4 w-4" />
+              LinkedIn
+            </a>
+          </div>
+        </div>
       </footer>
     </main>
   );

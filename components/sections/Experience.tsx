@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { SectionWrapper } from './SectionWrapper';
 import portfolioData from '@/data/portfolio.json';
-import { CheckCircle2, Activity } from 'lucide-react';
+import { BriefcaseBusiness, CheckCircle2, MapPin } from 'lucide-react';
 
 interface ExperienceProps {
   config: {
@@ -13,57 +13,70 @@ interface ExperienceProps {
 
 export function Experience({ config }: ExperienceProps) {
   return (
-    <SectionWrapper id="experience">
+    <SectionWrapper id="experience" className="border-y border-border/70 bg-card/45">
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider mb-4"
+        className="section-eyebrow mb-4 flex items-center gap-2"
       >
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
-        </span>
-        <Activity className="w-3 h-3" />
-        RUNTIME_LOG://CAREER_PATH
+        <BriefcaseBusiness className="h-4 w-4" />
+        Career
       </motion.div>
-      <h2 className="text-4xl md:text-6xl font-bold font-display mb-12 text-center md:text-left">
-        {config.title}
-      </h2>
+      <div className="mb-14 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
+          {config.title}
+        </h2>
+        <p className="max-w-xl text-base leading-7 text-muted-foreground">
+          Experience shipping global web systems, internal platforms, and reusable product modules.
+        </p>
+      </div>
 
-      <div className="space-y-12 relative border-l-2 border-white/5 ml-4 md:ml-12 pl-8 md:pl-12 py-4">
+      <div className="relative ml-3 space-y-8 border-l border-border pl-7 md:ml-6 md:pl-10">
         {portfolioData.experience.map((job, idx) => (
-          <div key={job.id} className="relative group">
-            {/* Timeline dot */}
-            <div className={`absolute -left-[41px] md:-left-[59px] top-0 h-5 w-5 rounded-full border-2 border-primary transition-all duration-300 shadow-[0_0_10px_theme(colors.primary.DEFAULT)] ${job.id === 1 ? 'bg-primary scale-125' : 'bg-background'}`} />
-            
-            <div className="glass-panel p-6 md:p-8 rounded-xl relative overflow-hidden">
-               <div className="absolute top-0 right-0 p-3 opacity-10 font-display text-9xl font-black text-white pointer-events-none">
-                 0{idx + 1}
-               </div>
-               
-               <div className="relative z-10">
-                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
-                   <div>
-                     <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{job.role}</h3>
-                     <p className="text-lg text-secondary">{job.company}</p>
-                   </div>
-                   <span className="text-sm font-mono text-muted-foreground bg-white/5 px-3 py-1 rounded border border-white/10 w-fit">
-                     {job.period}
-                   </span>
-                 </div>
-                 
-                 <ul className="space-y-3 mt-6">
-                   {job.achievements.map((item, i) => (
-                     <li key={i} className="flex items-start gap-3 text-muted-foreground text-sm md:text-base">
-                       <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                       <span>{item}</span>
-                     </li>
-                   ))}
-                 </ul>
-               </div>
+          <motion.article
+            key={job.id}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.08, duration: 0.5 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <span className="absolute -left-[35px] top-7 h-3 w-3 rounded-full border-2 border-background bg-primary md:-left-[47px]" />
+
+            <div className="premium-card rounded-lg p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8">
+              <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
+                <div>
+                  <p className="text-sm font-semibold text-primary">{job.company}</p>
+                  <h3 className="mt-2 text-2xl font-bold text-foreground">{job.role}</h3>
+                  <div className="mt-3 flex flex-wrap gap-3 text-sm text-muted-foreground">
+                    <span>{job.period}</span>
+                    <span className="hidden text-border sm:inline">/</span>
+                    <span className="inline-flex items-center gap-1">
+                      <MapPin className="h-4 w-4" />
+                      {job.location}
+                    </span>
+                  </div>
+                </div>
+                <span className="w-fit rounded-md border border-border bg-muted/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  Role 0{idx + 1}
+                </span>
+              </div>
+
+              <p className="mt-6 text-base leading-7 text-muted-foreground">
+                {job.description}
+              </p>
+
+              <ul className="mt-7 grid gap-3">
+                {job.achievements.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm leading-6 text-muted-foreground md:text-base">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          </motion.article>
         ))}
       </div>
     </SectionWrapper>

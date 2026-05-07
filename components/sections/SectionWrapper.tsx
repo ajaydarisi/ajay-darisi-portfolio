@@ -30,15 +30,15 @@ export function SectionWrapper({ id, className, children }: SectionWrapperProps)
       id={id} 
       ref={ref}
       className={cn(
-        "min-h-screen w-full flex flex-col justify-center px-4 md:px-12 py-20 relative overflow-hidden",
+        "w-full px-4 py-24 sm:px-6 md:py-28 lg:px-8 relative overflow-hidden scroll-mt-24",
         className
       )}
     >
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-7xl mx-auto w-full z-10 relative"
+        initial={{ opacity: 0, y: 28 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="mx-auto w-full max-w-6xl z-10 relative"
       >
         {children}
       </motion.div>

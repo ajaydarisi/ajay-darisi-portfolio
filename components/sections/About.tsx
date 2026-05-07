@@ -2,7 +2,7 @@
 
 import profileData from '@/data/portfolio.json';
 import { motion } from 'framer-motion';
-import { Terminal } from 'lucide-react';
+import { CheckCircle2, Layers3, ShieldCheck, UsersRound } from 'lucide-react';
 import { SectionWrapper } from './SectionWrapper';
 
 interface AboutProps {
@@ -13,62 +13,90 @@ interface AboutProps {
 
 export function About({ config }: AboutProps) {
   const { profile, about } = profileData;
+  const principles = [
+    {
+      title: 'Product-minded engineering',
+      description: 'I connect technical decisions to user experience, business flow, and delivery speed.',
+      icon: Layers3,
+    },
+    {
+      title: 'Reliable systems',
+      description: 'I build with maintainability, data integrity, access control, and performance in view.',
+      icon: ShieldCheck,
+    },
+    {
+      title: 'Team-scale execution',
+      description: 'I have worked across product, design, and engineering teams to ship complex workflows.',
+      icon: UsersRound,
+    },
+  ];
 
   return (
-    <SectionWrapper id="about" className="bg-background/50">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-        <div className="col-span-1 md:col-span-7 space-y-8">
+    <SectionWrapper id="about" className="border-y border-border/70 bg-card/45">
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+        <div className="lg:col-span-6">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-wider"
+            className="section-eyebrow mb-4"
           >
-            <Terminal className="w-3 h-3" />
-            <span>USER_PROFILE_LOADED<span className="animate-pulse">_</span></span>
-          </motion.div>
-          <h2 className="text-4xl md:text-6xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">
             {config.title}
+          </motion.div>
+          <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
+            Building practical software with polished user experience.
           </h2>
           
-          <div className="space-y-6 text-lg text-muted-foreground leading-relaxed font-light">
+          <div className="mt-7 space-y-5 text-base leading-8 text-muted-foreground md:text-lg">
             <p>
-              I am a <span className="text-primary font-medium">{profile.role}</span> based in {profile.location}. 
-              With over 3 years of experience, I specialize in building scalable web applications and intuitive user interfaces.
+              I am a <span className="font-semibold text-foreground">{profile.role}</span> based in {profile.location},
+              focused on building scalable web applications, admin platforms, payment workflows,
+              and interfaces that make complex operations feel manageable.
             </p>
             <p>
-              My journey started with a passion for turning complex problems into elegant solutions. 
-              I have led cross-functional teams, optimized high-traffic platforms, and built systems used globally.
+              Over the past 3+ years, I have shipped systems used across global teams, including
+              configurable registration flows, localization tooling, reusable payment modules, and
+              high-traffic product experiences.
             </p>
             <p>
-              I believe in the power of <span className="text-secondary font-medium">clean code</span>, 
-              <span className="text-secondary font-medium"> user-centric design</span>, and continuous learning.
+              My best work sits where clear product thinking meets strong implementation:
+              clean architecture, dependable data flow, accessible UI, and careful collaboration.
             </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
-            {about.stats.map((stat, i) => (
-              <div key={i} className="glass-panel p-4 rounded-sm border-l-2 border-l-primary">
-                <div className="text-2xl font-bold font-display text-white">{stat.value}</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
-              </div>
-            ))}
           </div>
         </div>
 
-        <div className="col-span-1 md:col-span-5 relative">
-          <div className="relative aspect-square w-full max-w-md mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary opacity-20 blur-3xl rounded-full" />
-            <div className="relative h-full w-full glass-panel rounded-2xl overflow-hidden border border-white/10 p-2">
-               <div className="h-full w-full bg-black/50 rounded-xl flex items-center justify-center relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-[url('/Ajay.jpeg')] bg-cover bg-center grayscale-0 md:grayscale md:group-hover:grayscale-0 transition-all duration-700 scale-100 md:scale-110 md:group-hover:scale-100" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-                  
-                  <div className="absolute bottom-4 left-4 right-4 p-4 glass-panel rounded-lg translate-y-0 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-500">
-                    <p className="text-sm font-mono text-primary">Mantra_</p>
-                    <p className="text-white font-bold">Code with Joy</p>
+        <div className="lg:col-span-6">
+          <div className="premium-card rounded-lg p-6 md:p-8">
+            <p className="section-eyebrow">How I work</p>
+            <div className="mt-6 space-y-6">
+              {principles.map(({ title, description, icon: Icon }) => (
+                <div key={title} className="flex gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-accent text-primary">
+                    <Icon className="h-5 w-5" />
                   </div>
-               </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground">{title}</h3>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 grid grid-cols-2 border-t border-border pt-6 sm:grid-cols-4">
+              {about.stats.map((stat) => (
+                <div key={stat.label} className="pr-4">
+                  <div className="text-2xl font-extrabold tabular-nums text-foreground">{stat.value}</div>
+                  <div className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex items-start gap-3 rounded-md bg-muted/75 p-4">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+              <p className="text-sm leading-6 text-muted-foreground">
+                Current focus: scalable Next.js applications, Supabase-backed products,
+                reusable UI systems, and payment-enabled customer journeys.
+              </p>
             </div>
           </div>
         </div>
