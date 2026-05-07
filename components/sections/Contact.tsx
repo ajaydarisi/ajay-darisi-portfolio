@@ -14,10 +14,20 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 
 const contactFormSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  subject: z.string().min(5, 'Subject must be at least 5 characters'),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
+  name: z.string().trim()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be 100 characters or fewer'),
+  email: z.string().trim()
+    .email('Invalid email address')
+    .max(254, 'Email must be 254 characters or fewer'),
+  subject: z.string().trim()
+    .min(5, 'Subject must be at least 5 characters')
+    .max(150, 'Subject must be 150 characters or fewer')
+    .refine((value) => !/[\r\n]/.test(value), 'Subject must be a single line'),
+  message: z.string().trim()
+    .min(10, 'Message must be at least 10 characters')
+    .max(5000, 'Message must be 5000 characters or fewer'),
+  company: z.string().trim().max(0).optional(),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -129,53 +139,75 @@ export function Contact({ config }: ContactProps) {
 
         <Card className="premium-card p-6 md:p-8">
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <div className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+              <label htmlFor="contact-company">Company</label>
+              <input
+                id="contact-company"
+                tabIndex={-1}
+                autoComplete="off"
+                {...register('company')}
+              />
+            </div>
+
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground">Name</label>
+                <label htmlFor="contact-name" className="text-sm font-semibold text-foreground">Name</label>
                 <Input
+                  id="contact-name"
                   {...register('name')}
                   placeholder="John Doe"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? 'contact-name-error' : undefined}
                   className="border-border bg-background/70 focus-visible:ring-ring/20"
                 />
                 {errors.name && (
-                  <p className="text-xs text-red-500">{errors.name.message}</p>
+                  <p id="contact-name-error" role="alert" className="text-xs text-red-500">{errors.name.message}</p>
                 )}
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground">Email</label>
+                <label htmlFor="contact-email" className="text-sm font-semibold text-foreground">Email</label>
                 <Input
+                  id="contact-email"
                   {...register('email')}
                   placeholder="john@example.com"
                   type="email"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? 'contact-email-error' : undefined}
                   className="border-border bg-background/70 focus-visible:ring-ring/20"
                 />
                 {errors.email && (
-                  <p className="text-xs text-red-500">{errors.email.message}</p>
+                  <p id="contact-email-error" role="alert" className="text-xs text-red-500">{errors.email.message}</p>
                 )}
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-foreground">Subject</label>
+              <label htmlFor="contact-subject" className="text-sm font-semibold text-foreground">Subject</label>
               <Input
+                id="contact-subject"
                 {...register('subject')}
                 placeholder="Project Inquiry"
+                aria-invalid={!!errors.subject}
+                aria-describedby={errors.subject ? 'contact-subject-error' : undefined}
                 className="border-border bg-background/70 focus-visible:ring-ring/20"
               />
               {errors.subject && (
-                <p className="text-xs text-red-500">{errors.subject.message}</p>
+                <p id="contact-subject-error" role="alert" className="text-xs text-red-500">{errors.subject.message}</p>
               )}
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-foreground">Message</label>
+              <label htmlFor="contact-message" className="text-sm font-semibold text-foreground">Message</label>
               <Textarea
+                id="contact-message"
                 {...register('message')}
                 placeholder="Tell me about your project..."
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? 'contact-message-error' : undefined}
                 className="min-h-[160px] resize-none border-border bg-background/70 focus-visible:ring-ring/20"
               />
               {errors.message && (
-                <p className="text-xs text-red-500">{errors.message.message}</p>
+                <p id="contact-message-error" role="alert" className="text-xs text-red-500">{errors.message.message}</p>
               )}
             </div>
 

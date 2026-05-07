@@ -23,16 +23,16 @@ export const metadata: Metadata = {
     title: 'Ajay Darisi - Software Engineer',
     description: 'Software engineer building scalable web platforms, admin systems, and payment-enabled products.',
     type: 'website',
-    images: ['/favicon.png'],
+    images: ['/og-image.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Ajay Darisi - Software Engineer',
     description: 'Software engineer building scalable web platforms, admin systems, and payment-enabled products.',
-    images: ['/favicon.png'],
+    images: ['/og-image.jpg'],
   },
   icons: {
-    icon: '/favicon.png',
+    icon: '/favicon-64.png',
   },
 };
 

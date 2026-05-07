@@ -10,7 +10,13 @@ import { Contact } from '@/components/sections/Contact';
 import portfolioData from '@/data/portfolio.json';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
-const SECTION_COMPONENTS: Record<string, React.ComponentType<any>> = {
+type SectionConfig = {
+  title: string;
+  subtitle?: string;
+  tagline?: string;
+};
+
+const SECTION_COMPONENTS: Record<string, React.ComponentType<{ config: SectionConfig }>> = {
   hero: Hero,
   about: About,
   skills: Skills,

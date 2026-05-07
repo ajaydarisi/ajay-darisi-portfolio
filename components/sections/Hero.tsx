@@ -10,8 +10,8 @@ import Image from 'next/image';
 interface HeroProps {
   config: {
     title: string;
-    subtitle: string;
-    tagline: string;
+    subtitle?: string;
+    tagline?: string;
   };
 }
 

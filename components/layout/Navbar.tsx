@@ -56,7 +56,7 @@ export function Navbar() {
           scrolled ? "py-3" : "py-5"
         )}
       >
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-[calc(72rem+2rem)] px-4 sm:max-w-[calc(72rem+3rem)] sm:px-6 lg:max-w-[calc(72rem+4rem)] lg:px-8">
           <nav className={cn(
             "flex items-center justify-between border px-4 py-3 transition-all duration-300 md:px-5",
             scrolled 

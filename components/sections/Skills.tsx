@@ -14,6 +14,7 @@ import {
   Zap,
   UsersRound
 } from 'lucide-react';
+import type { ReactNode } from 'react';
 
 interface SkillsProps {
   config: {
@@ -21,7 +22,7 @@ interface SkillsProps {
   };
 }
 
-const CATEGORY_ICONS: Record<string, any> = {
+const CATEGORY_ICONS: Record<string, ReactNode> = {
   "Frontend": <Globe className="w-5 h-5" />,
   "Backend": <Database className="w-5 h-5" />,
   "Languages": <Code2 className="w-5 h-5" />,
