@@ -50,6 +50,10 @@
       "items": ["Keycloak", "Supabase Auth", "Google OAuth"]
     },
     {
+      "category": "Gen AI",
+      "items": ["Claude", "Codex", "Antigravity", "Github Copilot"]
+    },
+    {
       "category": "Tools",
       "items": ["Git", "BitBucket", "Slack", "JIRA", "Docker", "Figma", "Adobe XD"]
     },
