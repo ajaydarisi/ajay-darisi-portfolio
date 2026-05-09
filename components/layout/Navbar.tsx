@@ -60,8 +60,8 @@ export function Navbar() {
           <nav className={cn(
             "flex items-center justify-between border px-4 py-3 transition-all duration-300 md:px-5",
             scrolled 
-              ? "bg-background/90 backdrop-blur-xl border-border/80 shadow-sm"
-              : "bg-background/65 backdrop-blur-md border-border/60"
+              ? "bg-white backdrop-blur-xl border-border/80 shadow-sm"
+              : "bg-white backdrop-blur-md border-border/60"
           )}>
             <button
               className="flex items-center gap-3 text-left"
