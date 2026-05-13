@@ -16,7 +16,7 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://darisi.in'),
+  metadataBase: new URL('https://ajay.darisi.in'),
   title: 'Ajay Darisi - Software Engineer',
   description: 'Professional portfolio of Ajay Darisi, a software engineer building scalable web platforms, admin systems, and payment-enabled products.',
   openGraph: {
