@@ -1,11 +1,8 @@
-'use client';
-
 import { SectionWrapper } from './SectionWrapper';
 import portfolioData from '@/data/portfolio.json';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowUpRight, ExternalLink, Github, LayoutPanelTop } from 'lucide-react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 interface ProjectsProps {
@@ -23,15 +20,10 @@ const PROJECT_TYPES: Record<number, string> = {
 export function Projects({ config }: ProjectsProps) {
   return (
     <SectionWrapper id="projects">
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        className="section-eyebrow mb-4 flex items-center gap-2"
-      >
+      <div className="section-eyebrow mb-4 flex items-center gap-2">
         <LayoutPanelTop className="h-4 w-4" />
         Selected Work
-      </motion.div>
+      </div>
       <div className="mb-14 flex flex-col justify-between gap-5 md:flex-row md:items-end">
         <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
           {config.title}
@@ -43,13 +35,9 @@ export function Projects({ config }: ProjectsProps) {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {portfolioData.projects.map((project, idx) => (
-          <motion.article
+        {portfolioData.projects.map((project) => (
+          <article
             key={project.id} 
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.08, duration: 0.5 }}
-            viewport={{ once: true }}
             className="group"
           >
             <Card className="premium-card flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -115,7 +103,7 @@ export function Projects({ config }: ProjectsProps) {
                 </div>
               </CardContent>
             </Card>
-          </motion.article>
+          </article>
         ))}
       </div>
     </SectionWrapper>

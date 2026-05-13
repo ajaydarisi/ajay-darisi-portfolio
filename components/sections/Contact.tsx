@@ -6,7 +6,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { Loader2, Mail, MapPin, Phone, Send } from 'lucide-react';
-import { motion } from 'framer-motion';
 import profileData from '@/data/portfolio.json';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -81,14 +80,9 @@ export function Contact({ config }: ContactProps) {
     <SectionWrapper id="contact" className="pb-16">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="section-eyebrow mb-4"
-          >
+          <div className="section-eyebrow mb-4">
             Contact
-          </motion.div>
+          </div>
           <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
             {config.title}
           </h2>

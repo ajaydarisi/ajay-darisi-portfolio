@@ -1,39 +1,66 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Download, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/lib/store';
 import portfolioData from '@/data/portfolio.json';
 
+const sectionLabels: Record<string, string> = {
+  hero: 'Home',
+  about: 'About',
+  skills: 'Expertise',
+  experience: 'Experience',
+  projects: 'Work',
+  contact: 'Contact',
+};
+
+const links = portfolioData.sections.map((section) => ({
+  id: section.id,
+  label: sectionLabels[section.id] || section.config.title || section.type,
+}));
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { activeSection, setActiveSection, setIsScrollingTo } = useUIStore();
 
-  const sectionLabels: Record<string, string> = {
-    hero: 'Home',
-    about: 'About',
-    skills: 'Expertise',
-    experience: 'Experience',
-    projects: 'Work',
-    contact: 'Contact',
-  };
-
-  const links = portfolioData.sections.map((section) => ({
-    id: section.id,
-    label: sectionLabels[section.id] || section.config.title || section.type,
-  }));
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (useUIStore.getState().isScrollingTo) return;
+
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry?.target.id) {
+          setActiveSection(visibleEntry.target.id);
+        }
+      },
+      {
+        rootMargin: '-35% 0px -50% 0px',
+        threshold: [0.1, 0.25, 0.5, 0.75],
+      }
+    );
+
+    links.forEach((link) => {
+      const element = document.getElementById(link.id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [setActiveSection]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -48,9 +75,7 @@ export function Navbar() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+      <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled ? "py-3" : "py-5"
@@ -117,39 +142,31 @@ export function Navbar() {
             </div>
           </nav>
         </div>
-      </motion.header>
+      </header>
 
-      {/* Mobile Nav Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-background/95 px-6 pt-28 backdrop-blur-xl md:hidden"
-          >
-            <div className="mx-auto flex max-w-sm flex-col gap-2">
-              {links.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className={cn(
-                    "border-b border-border/70 py-4 text-left text-2xl font-bold transition-colors",
-                    activeSection === link.id ? "text-foreground" : "text-muted-foreground"
-                  )}
-                >
-                  {link.label}
-                </button>
-              ))}
-              <Button className="mt-6" asChild>
-                <a href="/Resume.pdf" download>
-                  Download Resume <Download className="h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-40 bg-background/95 px-6 pt-28 backdrop-blur-xl md:hidden">
+          <div className="mx-auto flex max-w-sm flex-col gap-2">
+            {links.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className={cn(
+                  "border-b border-border/70 py-4 text-left text-2xl font-bold transition-colors",
+                  activeSection === link.id ? "text-foreground" : "text-muted-foreground"
+                )}
+              >
+                {link.label}
+              </button>
+            ))}
+            <Button className="mt-6" asChild>
+              <a href="/Resume.pdf" download>
+                Download Resume <Download className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

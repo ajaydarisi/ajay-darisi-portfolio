@@ -1,8 +1,5 @@
-'use client';
-
 import { SectionWrapper } from './SectionWrapper';
 import portfolioData from '@/data/portfolio.json';
-import { motion } from 'framer-motion';
 import { 
   Code2, 
   Database, 
@@ -39,14 +36,9 @@ export function Skills({ config }: SkillsProps) {
   return (
     <SectionWrapper id="skills">
       <div className="mb-14 max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="section-eyebrow mb-4"
-        >
+        <div className="section-eyebrow mb-4">
           Technical Expertise
-        </motion.div>
+        </div>
         <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
           {config.title}
         </h2>
@@ -57,13 +49,9 @@ export function Skills({ config }: SkillsProps) {
       </div>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {portfolioData.skills.map((category, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1, duration: 0.5 }}
-            viewport={{ once: true }}
+        {portfolioData.skills.map((category) => (
+          <div
+            key={category.category}
             className="group premium-card flex h-full flex-col rounded-lg p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
             <div className="mb-7 flex items-center gap-4">
@@ -85,7 +73,7 @@ export function Skills({ config }: SkillsProps) {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </SectionWrapper>

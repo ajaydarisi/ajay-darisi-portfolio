@@ -1,7 +1,4 @@
-'use client';
-
 import profileData from '@/data/portfolio.json';
-import { motion } from 'framer-motion';
 import { CheckCircle2, Layers3, ShieldCheck, UsersRound } from 'lucide-react';
 import { SectionWrapper } from './SectionWrapper';
 
@@ -35,14 +32,9 @@ export function About({ config }: AboutProps) {
     <SectionWrapper id="about" className="border-y border-border/70 bg-card/45">
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="section-eyebrow mb-4"
-          >
+          <div className="section-eyebrow mb-4">
             {config.title}
-          </motion.div>
+          </div>
           <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
             Building practical software with polished user experience.
           </h2>

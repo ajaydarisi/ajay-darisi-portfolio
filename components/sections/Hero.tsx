@@ -1,10 +1,6 @@
-'use client';
-
-import { SectionWrapper } from './SectionWrapper';
 import { Button } from '@/components/ui/button';
 import portfolioData from '@/data/portfolio.json';
 import { ArrowRight, Download } from 'lucide-react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 interface HeroProps {
@@ -19,31 +15,25 @@ export function Hero({ config }: HeroProps) {
   const { about, profile } = portfolioData;
 
   return (
-    <SectionWrapper id="hero" className="min-h-[100svh] flex items-center pt-24 pb-10 md:pt-28 md:pb-12 lg:pt-28 lg:pb-10">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+    <section id="hero" className="relative flex min-h-[100svh] w-full scroll-mt-24 items-center overflow-hidden px-4 pb-10 pt-24 sm:px-6 md:pb-12 md:pt-28 lg:px-8 lg:pb-10 lg:pt-28">
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="space-y-6">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="space-y-4"
-          >
+          <div className="space-y-4">
             <p className="section-eyebrow">{profile.name}</p>
-            <h1 className="max-w-3xl text-balance font-display text-5xl font-extrabold leading-[0.98] text-foreground sm:text-6xl lg:text-6xl xl:text-7xl">
+            <h1 className="max-w-3xl text-balance font-sans text-4xl font-extrabold leading-[1.02] text-foreground sm:text-6xl lg:text-6xl xl:text-7xl">
               Software engineer building scalable web platforms.
             </h1>
             <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
               I design and engineer dependable product experiences across admin systems,
               payment flows, localization platforms, and Supabase-backed applications.
             </p>
-          </motion.div>
+          </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button
-              size="lg"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Start a Conversation <ArrowRight className="h-4 w-4" />
+            <Button size="lg" asChild>
+              <a href="#contact">
+                Start a Conversation <ArrowRight className="h-4 w-4" />
+              </a>
             </Button>
 
             <Button size="lg" variant="outline" asChild>
@@ -63,12 +53,7 @@ export function Hero({ config }: HeroProps) {
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.65 }}
-          className="relative mx-auto w-full max-w-[420px] lg:mr-0"
-        >
+        <div className="relative mx-auto w-full max-w-[420px] lg:mr-0">
           <div className="premium-card relative aspect-[4/5] max-h-[calc(100svh-220px)] overflow-hidden rounded-lg p-2">
             <div className="relative h-full overflow-hidden rounded-md bg-muted">
               <Image
@@ -76,7 +61,8 @@ export function Hero({ config }: HeroProps) {
                 alt={`${config.title}, ${config.subtitle}`}
                 fill
                 priority
-                sizes="(min-width: 1024px) 420px, 90vw"
+                fetchPriority="high"
+                sizes="(min-width: 1024px) 420px, (min-width: 640px) 420px, calc(100vw - 64px)"
                 className="object-cover object-center"
               />
             </div>
@@ -87,8 +73,8 @@ export function Hero({ config }: HeroProps) {
               Shipping reliable web products for global teams.
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

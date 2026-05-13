@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { SectionWrapper } from './SectionWrapper';
 import portfolioData from '@/data/portfolio.json';
 import { BriefcaseBusiness, CheckCircle2, MapPin } from 'lucide-react';
@@ -14,15 +11,10 @@ interface ExperienceProps {
 export function Experience({ config }: ExperienceProps) {
   return (
     <SectionWrapper id="experience" className="border-y border-border/70 bg-card/45">
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        className="section-eyebrow mb-4 flex items-center gap-2"
-      >
+      <div className="section-eyebrow mb-4 flex items-center gap-2">
         <BriefcaseBusiness className="h-4 w-4" />
         Career
-      </motion.div>
+      </div>
       <div className="mb-14 flex flex-col justify-between gap-5 md:flex-row md:items-end">
         <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
           {config.title}
@@ -34,12 +26,8 @@ export function Experience({ config }: ExperienceProps) {
 
       <div className="relative ml-3 space-y-8 border-l border-border pl-7 md:ml-6 md:pl-10">
         {portfolioData.experience.map((job, idx) => (
-          <motion.article
+          <article
             key={job.id}
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.08, duration: 0.5 }}
-            viewport={{ once: true }}
             className="relative"
           >
             <span className="absolute -left-[35px] top-7 h-3 w-3 rounded-full border-2 border-background bg-primary md:-left-[47px]" />
@@ -76,7 +64,7 @@ export function Experience({ config }: ExperienceProps) {
                 ))}
               </ul>
             </div>
-          </motion.article>
+          </article>
         ))}
       </div>
     </SectionWrapper>

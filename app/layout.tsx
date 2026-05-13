@@ -13,6 +13,7 @@ const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair-display',
   display: 'swap',
+  preload: false,
 });
 
 export const metadata: Metadata = {
