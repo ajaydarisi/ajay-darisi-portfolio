@@ -6,7 +6,7 @@ import { Experience } from '@/components/sections/Experience';
 import { Projects } from '@/components/sections/Projects';
 import { Contact } from '@/components/sections/Contact';
 import portfolioData from '@/data/portfolio.json';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
 
 type SectionConfig = {
   title: string;
@@ -28,6 +28,12 @@ export default function HomeContent() {
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-foreground">
+      <a
+        href="#hero"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-lg"
+      >
+        Skip to content
+      </a>
       <Navbar />
 
       <div className="flex flex-col gap-0">
@@ -59,6 +65,10 @@ export default function HomeContent() {
             <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-primary">
               <Linkedin className="h-4 w-4" />
               LinkedIn
+            </a>
+            <a href={profile.socials.twitter} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-primary">
+              <Twitter className="h-4 w-4" />
+              Twitter
             </a>
           </div>
         </div>

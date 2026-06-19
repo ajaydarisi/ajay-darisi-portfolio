@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Download, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/lib/store';
+import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import portfolioData from '@/data/portfolio.json';
 
 const sectionLabels: Record<string, string> = {
@@ -24,7 +25,21 @@ const links = portfolioData.sections.map((section) => ({
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const { activeSection, setActiveSection, setIsScrollingTo } = useUIStore();
+
+  // Close the mobile menu once the viewport reaches the desktop breakpoint,
+  // otherwise the overlay hides (md:hidden) while the scroll lock stays on.
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const handleChange = () => {
+      if (mq.matches) setIsOpen(false);
+    };
+    handleChange();
+    mq.addEventListener('change', handleChange);
+    return () => mq.removeEventListener('change', handleChange);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,12 +77,63 @@ export function Navbar() {
     return () => observer.disconnect();
   }, [setActiveSection]);
 
+  // Lock body scroll, close on Escape, and trap focus while the mobile menu is open
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = 'hidden';
+
+    const getFocusable = () => {
+      const inMenu = Array.from(
+        menuRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      );
+      // Include the header toggle (the X) so keyboard users can reach the close control.
+      return menuButtonRef.current ? [...inMenu, menuButtonRef.current] : inMenu;
+    };
+
+    getFocusable()[0]?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      const focusable = getFocusable();
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [isOpen]);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       setIsScrollingTo(true);
       setActiveSection(id);
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
       setIsOpen(false);
       setTimeout(() => setIsScrollingTo(false), 1000);
     }
@@ -84,9 +150,9 @@ export function Navbar() {
         <div className="mx-auto w-full max-w-[calc(72rem+2rem)] px-4 sm:max-w-[calc(72rem+3rem)] sm:px-6 lg:max-w-[calc(72rem+4rem)] lg:px-8">
           <nav className={cn(
             "flex items-center justify-between border px-4 py-3 transition-all duration-300 md:px-5",
-            scrolled 
-              ? "bg-white backdrop-blur-xl border-border/80 shadow-sm"
-              : "bg-white backdrop-blur-md border-border/60"
+            scrolled
+              ? "bg-card/85 backdrop-blur-xl border-border/80 shadow-sm"
+              : "bg-card/70 backdrop-blur-md border-border/60"
           )}>
             <button
               className="flex items-center gap-3 text-left"
@@ -117,7 +183,7 @@ export function Navbar() {
                   {link.label}
                   <span
                     className={cn(
-                      "absolute inset-x-0 -bottom-1 h-px origin-left bg-primary transition-transform duration-300",
+                      "absolute inset-x-0 -bottom-1 h-0.5 origin-left bg-primary transition-transform duration-300",
                       activeSection === link.id ? "scale-x-100" : "scale-x-0"
                     )}
                   />
@@ -126,16 +192,21 @@ export function Navbar() {
             </div>
 
             <div className="flex items-center gap-2">
+              <ThemeToggle />
               <Button variant="outline" size="sm" className="hidden md:inline-flex" asChild>
                 <a href="/Resume.pdf" download>
                   Resume <Download className="h-4 w-4" />
                 </a>
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                ref={menuButtonRef}
+                variant="ghost"
+                size="icon"
                 className="md:hidden"
                 onClick={() => setIsOpen(!isOpen)}
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu"
               >
                 {isOpen ? <X /> : <Menu />}
               </Button>
@@ -144,10 +215,19 @@ export function Navbar() {
         </div>
       </header>
 
-      {isOpen && (
-        <div className="fixed inset-0 z-40 bg-background/95 px-6 pt-28 backdrop-blur-xl md:hidden">
-          <div className="mx-auto flex max-w-sm flex-col gap-2">
-            {links.map((link) => (
+      <div
+        ref={menuRef}
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+        className={cn(
+          "fixed inset-0 z-40 bg-background/95 px-6 pt-28 backdrop-blur-xl",
+          isOpen ? "block md:hidden" : "hidden"
+        )}
+      >
+        <div className="mx-auto flex max-w-sm flex-col gap-2">
+          {links.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
@@ -165,8 +245,7 @@ export function Navbar() {
               </a>
             </Button>
           </div>
-        </div>
-      )}
+      </div>
     </>
   );
 }

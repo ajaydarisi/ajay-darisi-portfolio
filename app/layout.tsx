@@ -1,7 +1,28 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Playfair_Display } from 'next/font/google';
 import { Providers } from '@/components/providers';
+import portfolioData from '@/data/portfolio.json';
 import './globals.css';
+
+const { profile } = portfolioData;
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.role,
+  email: profile.email,
+  url: 'https://ajay.darisi.in',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: profile.location,
+  },
+  sameAs: [
+    profile.socials.github,
+    profile.socials.linkedin,
+    profile.socials.twitter,
+  ],
+};
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -43,8 +64,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${playfairDisplay.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${dmSans.variable} ${playfairDisplay.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Providers>
           {children}
         </Providers>

@@ -4,6 +4,10 @@ import { z } from 'zod';
 
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
+// NOTE: This is an in-memory limiter. On serverless platforms (e.g. Vercel)
+// each instance keeps its own Map and cold starts reset it, so it only
+// throttles bursts hitting the same warm instance. For durable, cross-instance
+// rate limiting, back this with a shared store such as Vercel KV / Upstash Redis.
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
 
 const contactSchema = z.object({
