@@ -155,7 +155,7 @@ export function Contact({ config }: ContactProps) {
                   className="border-border bg-background/70 focus-visible:ring-ring/20"
                 />
                 {errors.name && (
-                  <p id="contact-name-error" role="alert" className="text-xs text-red-500">{errors.name.message}</p>
+                  <p id="contact-name-error" role="alert" className="text-xs text-destructive">{errors.name.message}</p>
                 )}
               </div>
               <div className="space-y-2">
@@ -170,7 +170,7 @@ export function Contact({ config }: ContactProps) {
                   className="border-border bg-background/70 focus-visible:ring-ring/20"
                 />
                 {errors.email && (
-                  <p id="contact-email-error" role="alert" className="text-xs text-red-500">{errors.email.message}</p>
+                  <p id="contact-email-error" role="alert" className="text-xs text-destructive">{errors.email.message}</p>
                 )}
               </div>
             </div>
@@ -186,7 +186,7 @@ export function Contact({ config }: ContactProps) {
                 className="border-border bg-background/70 focus-visible:ring-ring/20"
               />
               {errors.subject && (
-                <p id="contact-subject-error" role="alert" className="text-xs text-red-500">{errors.subject.message}</p>
+                <p id="contact-subject-error" role="alert" className="text-xs text-destructive">{errors.subject.message}</p>
               )}
             </div>
 
@@ -201,7 +201,7 @@ export function Contact({ config }: ContactProps) {
                 className="min-h-[160px] resize-none border-border bg-background/70 focus-visible:ring-ring/20"
               />
               {errors.message && (
-                <p id="contact-message-error" role="alert" className="text-xs text-red-500">{errors.message.message}</p>
+                <p id="contact-message-error" role="alert" className="text-xs text-destructive">{errors.message.message}</p>
               )}
             </div>
 

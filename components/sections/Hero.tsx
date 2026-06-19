@@ -8,6 +8,7 @@ interface HeroProps {
     title: string;
     subtitle?: string;
     tagline?: string;
+    intro?: string;
   };
 }
 
@@ -21,12 +22,13 @@ export function Hero({ config }: HeroProps) {
           <div className="space-y-4">
             <p className="section-eyebrow">{profile.name}</p>
             <h1 className="max-w-3xl text-balance font-sans text-4xl font-extrabold leading-[1.02] text-foreground sm:text-6xl lg:text-6xl xl:text-7xl">
-              Software engineer building scalable web platforms.
+              {config.tagline}
             </h1>
-            <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
-              I design and engineer dependable product experiences across admin systems,
-              payment flows, localization platforms, and Supabase-backed applications.
-            </p>
+            {config.intro && (
+              <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
+                {config.intro}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">

@@ -11,12 +11,6 @@ interface ProjectsProps {
   };
 }
 
-const PROJECT_TYPES: Record<number, string> = {
-  1: 'Commerce and mobile-ready product',
-  2: 'Two-sided marketplace',
-  3: 'Accounting and inventory platform',
-};
-
 export function Projects({ config }: ProjectsProps) {
   return (
     <SectionWrapper id="projects">
@@ -59,7 +53,7 @@ export function Projects({ config }: ProjectsProps) {
               
               <CardHeader className="pb-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-                  {PROJECT_TYPES[project.id] || 'Product build'}
+                  {project.type ?? 'Product build'}
                 </p>
                 <CardTitle className="text-2xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary">
                   {project.title}

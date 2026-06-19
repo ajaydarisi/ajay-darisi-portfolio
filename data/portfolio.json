@@ -17,11 +17,11 @@
       { "label": "Experience", "value": "3+ Years" },
       { "label": "Projects", "value": "10+" },
       { "label": "Users Impacted", "value": "1M+" },
-      { "label": "Uptime", "value": "99.9%" }
+      { "label": "Countries", "value": "60+" }
     ]
   },
   "sections": [
-    { "id": "hero", "type": "hero", "config": { "title": "Ajay Darisi", "subtitle": "Software Engineer", "tagline": "Building scalable web platforms with clarity and craft." } },
+    { "id": "hero", "type": "hero", "config": { "title": "Ajay Darisi", "subtitle": "Software Engineer", "tagline": "Software engineer building scalable web platforms.", "intro": "I design and engineer dependable product experiences across admin systems, payment flows, localization platforms, and Supabase-backed applications." } },
     { "id": "about", "type": "about", "config": { "title": "About Me" } },
     { "id": "skills", "type": "skills", "config": { "title": "Technical Expertise" } },
     { "id": "experience", "type": "experience", "config": { "title": "Experience" } },
@@ -96,8 +96,9 @@
     {
       "id": 1,
       "title": "Bhagyalakshmi Future Gold",
+      "type": "Commerce and mobile-ready product",
       "tech": ["Next.js", "TypeScript", "React", "Supabase", "Razorpay", "Tailwind CSS", "Capacitor"],
-      "image": "/projects/bhagyalakshmi.png",
+      "image": "/projects/bhagyalakshmi.webp",
       "github": "https://github.com/ajaydarisi/Bhagyalakshmi-Future-Gold",
       "link": "https://bfg.darisi.in",
       "description": "A full-stack bilingual (English & Telugu) jewelry e-commerce platform with product catalog, cart, wishlist, multi-step checkout with Razorpay payments, order tracking, admin dashboard with revenue analytics, and cross-platform mobile support via Capacitor. Features dual store modes (online e-commerce / offline catalog with WhatsApp)."
@@ -105,8 +106,9 @@
     {
       "id": 2,
       "title": "DevMarket",
+      "type": "Two-sided marketplace",
       "tech": ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "shadcn/ui"],
-      "image": "/projects/devmarket.png",
+      "image": "/projects/devmarket.webp",
       "github": "https://github.com/ajaydarisi/market-place",
       "link": "https://market-place-for-websites.vercel.app/",
       "description": "A two-sided marketplace connecting clients with developers for freelance projects. Clients post projects with budgets and categories, developers browse and submit proposals, and both sides communicate through built-in messaging. Features role-based onboarding, real-time notifications, and Supabase-powered authentication."
@@ -114,8 +116,9 @@
     {
       "id": 3,
       "title": "TexLedger",
+      "type": "Accounting and inventory platform",
       "tech": ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
-      "image": "/projects/texledger.png",
+      "image": "/projects/texledger.webp",
       "github": "https://github.com/ajaydarisi/Textile-Inventory-Manager",
       "link": "https://textile-inventory-app.vercel.app/",
       "description": "A Tally-like accounting and inventory management system for textile wholesalers. Features journal-based double-entry accounting with strict debit-credit validation, stock tracking via movement events, voucher management (purchase, sales, receipt, payment), and financial reports including trial balance and profit/loss. Uses PostgreSQL functions for accounting logic and Row Level Security for company-level data isolation."
