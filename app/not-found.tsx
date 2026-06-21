@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, ArrowLeft } from "lucide-react";
@@ -17,10 +18,10 @@ export default function NotFound() {
           </p>
 
           <Button asChild className="mt-6">
-            <a href="/">
+            <Link href="/">
               <ArrowLeft className="h-4 w-4" />
               Go home
-            </a>
+            </Link>
           </Button>
         </CardContent>
       </Card>
