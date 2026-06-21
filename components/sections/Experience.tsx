@@ -39,7 +39,7 @@ export function Experience({ config }: ExperienceProps) {
                   <h3 className="mt-2 text-2xl font-bold text-foreground">{job.role}</h3>
                   <div className="mt-3 flex flex-wrap gap-3 text-sm text-muted-foreground">
                     <span>{job.period}</span>
-                    <span className="hidden text-border sm:inline">/</span>
+                    <span className="hidden text-muted-foreground/40 sm:inline">/</span>
                     <span className="inline-flex items-center gap-1">
                       <MapPin className="h-4 w-4" />
                       {job.location}
@@ -47,7 +47,7 @@ export function Experience({ config }: ExperienceProps) {
                   </div>
                 </div>
                 <span className="w-fit rounded-md border border-border bg-muted/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                  Role 0{idx + 1}
+                  Role {String(idx + 1).padStart(2, '0')}
                 </span>
               </div>
 

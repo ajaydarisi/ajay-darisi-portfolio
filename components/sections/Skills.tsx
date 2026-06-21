@@ -37,7 +37,7 @@ export function Skills({ config }: SkillsProps) {
     <SectionWrapper id="skills">
       <div className="mb-14 max-w-3xl">
         <div className="section-eyebrow mb-4">
-          Technical Expertise
+          What I use
         </div>
         <h2 className="text-balance font-display text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
           {config.title}

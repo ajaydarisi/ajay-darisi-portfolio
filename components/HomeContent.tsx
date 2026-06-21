@@ -51,7 +51,7 @@ export default function HomeContent() {
         <div className="mx-auto flex max-w-6xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="font-semibold text-foreground">&copy; {new Date().getFullYear()} {profile.name}</p>
-            <p className="mt-1">{profile.location} - Available for selected product work</p>
+            <p className="mt-1">{profile.location} - {profile.availability}</p>
           </div>
           <div className="flex items-center gap-4">
             <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 transition hover:text-primary">

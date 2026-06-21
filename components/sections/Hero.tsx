@@ -72,7 +72,7 @@ export function Hero({ config }: HeroProps) {
           <div className="absolute -bottom-5 left-5 right-5 rounded-lg border border-border bg-card/95 p-3 shadow-xl backdrop-blur">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Current focus</p>
             <p className="mt-1.5 text-base font-bold text-foreground">
-              Shipping reliable web products for global teams.
+              {profile.currentFocus}
             </p>
           </div>
         </div>
