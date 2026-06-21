@@ -29,7 +29,7 @@ export default function HomeContent() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-foreground">
       <a
-        href="#hero"
+        href="#about"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-lg"
       >
         Skip to content

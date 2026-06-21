@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { DM_Sans, Playfair_Display } from 'next/font/google';
 import { Providers } from '@/components/providers';
 import portfolioData from '@/data/portfolio.json';
@@ -34,8 +34,14 @@ const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair-display',
   display: 'swap',
-  preload: false,
 });
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f7f4f0' },
+    { media: '(prefers-color-scheme: dark)', color: '#131924' },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ajay.darisi.in'),

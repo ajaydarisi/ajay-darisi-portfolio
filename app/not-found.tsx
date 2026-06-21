@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { AlertCircle, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -14,6 +15,13 @@ export default function NotFound() {
           <p className="mt-4 text-sm leading-6 text-muted-foreground">
             The page you are looking for does not exist.
           </p>
+
+          <Button asChild className="mt-6">
+            <a href="/">
+              <ArrowLeft className="h-4 w-4" />
+              Go home
+            </a>
+          </Button>
         </CardContent>
       </Card>
     </div>
