@@ -2,6 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { z } from 'zod';
 
+let cachedTransporter: nodemailer.Transporter | null = null;
+
+function getTransporter(user: string, pass: string) {
+  if (!cachedTransporter) {
+    cachedTransporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user, pass },
+    });
+  }
+  return cachedTransporter;
+}
+
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 // NOTE: This is an in-memory limiter. On serverless platforms (e.g. Vercel)
@@ -84,6 +96,19 @@ function escapeHtml(value: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    const rateLimit = checkRateLimit(getClientIp(request));
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { success: false, error: 'Too many submissions. Please try again later.' },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': rateLimit.retryAfter.toString(),
+          },
+        }
+      );
+    }
+
     let body: unknown;
 
     try {
@@ -104,19 +129,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const rateLimit = checkRateLimit(getClientIp(request));
-    if (!rateLimit.allowed) {
-      return NextResponse.json(
-        { success: false, error: 'Too many submissions. Please try again later.' },
-        {
-          status: 429,
-          headers: {
-            'Retry-After': rateLimit.retryAfter.toString(),
-          },
-        }
-      );
-    }
-
     const emailUser = process.env.EMAIL_USER;
     const emailPassword = process.env.EMAIL_APP_PASSWORD;
 
@@ -128,13 +140,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: emailUser,
-        pass: emailPassword,
-      },
-    });
+    const transporter = getTransporter(emailUser, emailPassword);
 
     const safeName = escapeHtml(data.name);
     const safeEmail = escapeHtml(data.email);

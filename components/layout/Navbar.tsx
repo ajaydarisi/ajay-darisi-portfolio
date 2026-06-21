@@ -154,9 +154,10 @@ export function Navbar() {
               ? "bg-card/85 backdrop-blur-xl border-border/80 shadow-sm"
               : "bg-card/70 backdrop-blur-md border-border/60"
           )}>
-            <button
+            <a
+              href="#hero"
               className="flex items-center gap-3 text-left"
-              onClick={() => scrollToSection('hero')}
+              onClick={(e) => { e.preventDefault(); scrollToSection('hero'); }}
               aria-label="Go to top"
             >
               <span className="flex h-9 w-9 items-center justify-center rounded-md bg-foreground text-sm font-bold text-background shadow-sm">
@@ -166,16 +167,17 @@ export function Navbar() {
                 <span className="block text-sm font-extrabold text-foreground">Ajay Darisi</span>
                 <span className="block text-xs font-medium text-muted-foreground">Software Engineer</span>
               </span>
-            </button>
+            </a>
 
             <div className="hidden items-center gap-6 md:flex">
               {links.map((link) => (
-                <button
+                <a
                   key={link.id}
-                  onClick={() => scrollToSection(link.id)}
+                  href={`#${link.id}`}
+                  onClick={(e) => { e.preventDefault(); scrollToSection(link.id); }}
                   className={cn(
                     "relative py-2 text-sm font-semibold transition-colors duration-200",
-                    activeSection === link.id 
+                    activeSection === link.id
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   )}
@@ -187,7 +189,7 @@ export function Navbar() {
                       activeSection === link.id ? "scale-x-100" : "scale-x-0"
                     )}
                   />
-                </button>
+                </a>
               ))}
             </div>
 
@@ -228,16 +230,17 @@ export function Navbar() {
       >
         <div className="mx-auto flex max-w-sm flex-col gap-2">
           {links.map((link) => (
-              <button
+              <a
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                href={`#${link.id}`}
+                onClick={(e) => { e.preventDefault(); scrollToSection(link.id); }}
                 className={cn(
                   "border-b border-border/70 py-4 text-left text-2xl font-bold transition-colors",
-                  activeSection === link.id ? "text-foreground" : "text-muted-foreground"
+                  activeSection === link.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {link.label}
-              </button>
+              </a>
             ))}
             <Button className="mt-6" asChild>
               <a href="/Resume.pdf" download>

@@ -2,7 +2,7 @@ import { SectionWrapper } from './SectionWrapper';
 import portfolioData from '@/data/portfolio.json';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowUpRight, ExternalLink, Github, LayoutPanelTop } from 'lucide-react';
+import { ExternalLink, Github, LayoutPanelTop } from 'lucide-react';
 import Image from 'next/image';
 
 interface ProjectsProps {
@@ -93,7 +93,6 @@ export function Projects({ config }: ProjectsProps) {
                       Code <Github className="h-4 w-4" />
                     </a>
                   )}
-                  <ArrowUpRight className="ml-auto h-5 w-5 text-muted-foreground transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
                 </div>
               </CardContent>
             </Card>

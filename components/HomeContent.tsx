@@ -29,7 +29,7 @@ export default function HomeContent() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-foreground">
       <a
-        href="#hero"
+        href="#about"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-lg"
       >
         Skip to content
@@ -51,7 +51,7 @@ export default function HomeContent() {
         <div className="mx-auto flex max-w-6xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="font-semibold text-foreground">&copy; {new Date().getFullYear()} {profile.name}</p>
-            <p className="mt-1">{profile.location} - Available for selected product work</p>
+            <p className="mt-1">{profile.location} - {profile.availability}</p>
           </div>
           <div className="flex items-center gap-4">
             <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 transition hover:text-primary">

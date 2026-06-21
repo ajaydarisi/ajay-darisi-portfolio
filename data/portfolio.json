@@ -10,7 +10,9 @@
       "github": "https://github.com/ajaydarisi",
       "linkedin": "https://linkedin.com/in/ajaydarisi",
       "twitter": "https://twitter.com/ajaydarisi"
-    }
+    },
+    "currentFocus": "Shipping reliable web products for global teams.",
+    "availability": "Available for selected product work"
   },
   "about": {
     "stats": [
@@ -51,7 +53,7 @@
     },
     {
       "category": "Gen AI",
-      "items": ["Claude", "Codex", "Antigravity", "Github Copilot"]
+      "items": ["Claude", "Codex", "Cursor", "Github Copilot"]
     },
     {
       "category": "Tools",
