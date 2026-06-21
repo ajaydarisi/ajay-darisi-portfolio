@@ -132,7 +132,7 @@ export function Contact({ config }: ContactProps) {
         </div>
 
         <Card className="premium-card p-6 md:p-8">
-          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <form className="relative space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
               <label htmlFor="contact-company">Company</label>
               <input
